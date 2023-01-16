@@ -1,1 +1,29 @@
-<p>login works!</p>
+<div class="page">
+    <div class="content">
+        <div class="img-box">
+            <img src="assets/img/hicardi-livestudio.png"/>
+        </div>
+        <div class="form-box">
+            <mat-card>
+                <form [formGroup]="form" (ngSubmit)="log()">
+                    <mat-form-field appearance="outline" class="mat-form-field login-full-width">
+                        <input matInput placeholder="Account" formControlName="account" required>
+                        <!-- <mat-error *ngIf="isFieldInvalid('account')">
+                          Please inform your user name
+                        </mat-error> -->
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" class="login-full-width" >
+                        <input matInput type="password" placeholder="Password" formControlName="password" required>
+                        <!-- <mat-error *ngIf="isFieldInvalid('password')">
+                          Please inform your password
+                        </mat-error> -->
+                      </mat-form-field>
+                    <button mat-flat-button color="primary">Login</button>
+                  </form>
+            </mat-card>
+        </div>
+    </div>
+    <div class="footer">
+        <img src="assets/img/login_mezoo.png"/>
+    </div>
+</div>

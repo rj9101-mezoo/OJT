@@ -1,0 +1,12 @@
+<nav>
+    <button mat-button *ngFor="let head of heads" (click)="move(head.path)"
+    [class.selected]="head.path===test">{{head.name}}</button>
+    <!-- <button mat-button>ECG Records</button>
+    <button mat-button>Manuals</button>
+    <button mat-button>Setting</button> -->
+    <!--button mat-button routerLink="login" *ngIf="!isLoggedIn; else notLoggedIn">Login</button>
+    <ng-template #notLoggedIn>
+      <button mat-button (click)="onLogout()">Logout</button>
+    </ng-template -->
+    <button mat-button (click)="logout()" style="background-color: gray;">Logout</button>
+</nav>
