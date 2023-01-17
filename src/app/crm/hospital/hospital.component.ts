@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/auth/user.service';
 import { Hospital } from '../hospital';
 import { HospitalService } from '../hospital.service';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-hospital',
@@ -17,7 +20,7 @@ export class HospitalComponent {
   }
   countHospital!:number;
 
-  hospitals:Hospital[] = [];
+  hospitals$:Hospital[] = [];
   displayedColumns: string[] = [
     'index',
     'hospitalName',
@@ -30,7 +33,7 @@ export class HospitalComponent {
     'delete'
     ];
 
-  
+  private searchTerms = new Subject<string>();
 
   constructor(private userService:UserService, private hospitalService:HospitalService, private router:Router ) { }
 
@@ -38,9 +41,19 @@ export class HospitalComponent {
     console.log(this.userService.isLoggedIn);
 
     this.getHospitals();
-    this.countHospital = this.hospitals.length;
-    this.hospitals = this.hospitals.reverse();
-    console.log(this.hospitals)
+    this.countHospital = this.hospitals$.length;
+    this.hospitals$ = this.hospitals$.reverse();
+    // console.log(this.hospitals$)
+    // this.hospitals$ = this.searchTerms.pipe(
+    //   // wait 300ms after each keystroke before considering the term
+    //   debounceTime(300),
+
+    //   // ignore new term if same as previous term
+    //   distinctUntilChanged(),
+
+    //   // switch to new search observable each time the term changes
+    //   // switchMap((term: string) => this.heroService.searchHeroes(term))
+    // );
   }
 
   logout(){
@@ -48,10 +61,14 @@ export class HospitalComponent {
   }
 
   getHospitals():void{
-    this.hospitalService.getHospitals().subscribe(hospitals=> this.hospitals = hospitals)
+    this.hospitalService.getHospitals().subscribe(hospitals=> this.hospitals$ = hospitals)
   }
 
   moveDetail(id:number){
     this.router.navigate([`/crm/hospital/${id}`]);
+  }
+
+  search(term: string) : void{
+    this.searchTerms.next(term);
   }
 }

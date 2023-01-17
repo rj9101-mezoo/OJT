@@ -121,7 +121,9 @@
 }
 
 .content-bottom{
+    overflow: auto;
     overflow-y: scroll;
+    position: relative;
 }
 
 .mat-mdc-row:hover .mat-mdc-cell {
@@ -145,6 +147,9 @@
 
 .mat-mdc-header-row {
     background-color: #dfe1e7;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
 }
 
 .mat-mdc-header-cell {
