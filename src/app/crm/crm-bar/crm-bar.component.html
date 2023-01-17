@@ -1,0 +1,16 @@
+<div class="bar" [class.black]="!test">
+    <button *ngIf="!test" routerLink="..">
+        <span>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon>
+            <!-- <mat-icon>arrow_back</mat-icon> -->
+            <span class="text">Back to {{path==="crm"?"Home":(path.charAt(0).toUpperCase() + path.slice(1))}}</span>
+        </span>
+    </button>
+    <button *ngIf="test"></button>
+    <button (click)="logout()">
+        <span>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="logout"></mat-icon>
+            <span class="text">Logout</span>
+        </span>
+    </button>
+</div>

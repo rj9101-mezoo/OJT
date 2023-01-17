@@ -1,0 +1,123 @@
+<app-crm-bar></app-crm-bar>
+<div class="hospital-management">
+    <div class="title">Hospital Management</div>
+    <div class="content-box">
+        <div class="content">
+            <div class="content-top">
+                <div class="hospitalInfo">
+                    <div class="bed-count">
+                        <div class="count">Beds</div>
+                        <div class="count" style="color:blue">
+                            <p>Sold</p>
+                            <div>{{Beds.sold}}</div>
+                        </div>
+                        <div class="count" style="color:red">
+                            <p>Left</p>
+                            <div>{{Beds.Left}}</div>
+                        </div>
+                        <div class="count" style="color:black">
+                            <p>Total</p>
+                            <div>{{Beds.Total}}</div>
+                        </div>
+                    </div>
+                    <div class="hospital-count">
+                        <p>Hospital</p>
+                        <div>{{countHospital}}</div>
+                    </div>
+                    <button mat-flat-button style="background:#3f51b5">
+                        <span style="display:flex; align-items: center;font-size: 1.1em;">
+                            <svg style="margin-right:10px;" xmlns="http://www.w3.org/2000/svg" width="29" height="28"
+                                viewBox="0 0 29 28" fill="none">
+                                <path _ngcontent-fwf-c300=""
+                                    d="M3.41042 16.1887C2.73258 16.1887 2.14717 15.9552 1.65419 15.4883C1.19202 14.9902 0.960938 14.3987 0.960938 13.7139C0.960938 13.029 1.19202 12.4531 1.65419 11.9862C2.14717 11.4881 2.73258 11.239 3.41042 11.239H11.4984C11.7448 11.239 11.8681 11.099 11.8681 10.8188V2.83397C11.8681 2.11798 12.13 1.49538 12.6538 0.966176C13.1776 0.436967 13.7938 0.172363 14.5024 0.172363C15.2111 0.172363 15.8273 0.436967 16.3511 0.966176C16.8749 1.49538 17.1368 2.11798 17.1368 2.83397V10.8188C17.1368 11.099 17.26 11.239 17.5065 11.239H25.5945C26.2723 11.239 26.8423 11.4881 27.3045 11.9862C27.7975 12.4531 28.0439 13.029 28.0439 13.7139C28.0439 14.3987 27.7975 14.9902 27.3045 15.4883C26.8423 15.9552 26.2723 16.1887 25.5945 16.1887H17.5065C17.26 16.1887 17.1368 16.3288 17.1368 16.609V24.5938C17.1368 25.3098 16.8749 25.9324 16.3511 26.4616C15.8273 26.9908 15.2111 27.2554 14.5024 27.2554C13.7938 27.2554 13.1776 26.9908 12.6538 26.4616C12.13 25.9324 11.8681 25.3098 11.8681 24.5938V16.609C11.8681 16.3288 11.7448 16.1887 11.4984 16.1887H3.41042Z"
+                                    fill="white"></path>
+                            </svg>
+                            <div style="vertical-align: middle;">
+                                <span style="white-space: nowrap;vertical-align:-8px;">Add new</span>
+                                <p>Hospital</p>
+                            </div>
+                        </span>
+                    </button>
+                </div>
+                <div class="search">
+                    <!-- <mat-form-field appearance="fill">
+                    <div style="display:flex;">
+                        <mat-icon style="padding-right:20px">search</mat-icon>
+                        <input matInput placeholder="Hospital Name">
+                    </div>
+                    <mat-hint></mat-hint>
+                      </mat-form-field> -->
+                      <div class="search-box">
+                        <mat-icon style="padding-right:20px">search</mat-icon>
+                        <input placeholder="Hospital Name">
+                      </div>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <table mat-table [dataSource]="hospitals" class="mat-elevation-z8 demo-table">
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="index">
+                        <th mat-header-cell *matHeaderCellDef>index</th>
+                        <td mat-cell *matCellDef="let element">{{element.index}}</td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="hospitalName">
+                        <th mat-header-cell *matHeaderCellDef>Hospital Name</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.hospitalName}}
+                            <span *ngIf="element.self" class="self">self</span>
+                        </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="registrationDate">
+                        <th mat-header-cell *matHeaderCellDef>Registration Date</th>
+                        <td mat-cell *matCellDef="let element">{{element.registrationDate}}</td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="numberOfBeds">
+                        <th mat-header-cell *matHeaderCellDef>Number of Beds</th>
+                        <td mat-cell *matCellDef="let element">{{element.numberOfBeds}}</td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="numberOfDevice">
+                        <th mat-header-cell *matHeaderCellDef>Number of Device</th>
+                        <td mat-cell *matCellDef="let element">{{element.numberOfDevice}}</td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="numberOfAllocatedDevice">
+                        <th mat-header-cell *matHeaderCellDef>Number of Allocated Devices</th>
+                        <td mat-cell *matCellDef="let element">{{element.numberOfAllocatedDevice}}</td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="roomName">
+                        <th mat-header-cell *matHeaderCellDef>RoomName</th>
+                        <td mat-cell *matCellDef="let element">{{element.roomName}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef>Status</th>
+                        <td mat-cell *matCellDef="let element">{{element.status}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="delete">
+                        <th mat-header-cell *matHeaderCellDef>Delete</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-button style="background:#dfe1e7; color:red;"
+                                *ngIf="element.delete">Delete</button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row (click)="moveDetail(row.index)" *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

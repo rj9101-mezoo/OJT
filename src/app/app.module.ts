@@ -17,6 +17,15 @@ import { HeaderComponent } from './header/header.component';
 import { HistoryComponent } from './home/history/history.component';
 import { ManualComponent } from './home/manual/manual.component';
 import { SettingComponent } from './home/setting/setting.component';
+import { CrmComponent } from './crm/crm/crm.component';
+import { HospitalComponent } from './crm/hospital/hospital.component';
+import { AgencyComponent } from './crm/agency/agency.component';
+import { PointComponent } from './crm/point/point.component';
+import { ListComponent } from './crm/hospital/list/list.component';
+import { CrmBarComponent } from './crm/crm-bar/crm-bar.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +35,13 @@ import { SettingComponent } from './home/setting/setting.component';
     HeaderComponent,
     HistoryComponent,
     ManualComponent,
-    SettingComponent
+    SettingComponent,
+    CrmComponent,
+    HospitalComponent,
+    AgencyComponent,
+    PointComponent,
+    ListComponent,
+    CrmBarComponent
   ],
   imports: [
     // material style
@@ -34,6 +49,8 @@ import { SettingComponent } from './home/setting/setting.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
+    MatTableModule,
 
     // browser
     BrowserModule,
