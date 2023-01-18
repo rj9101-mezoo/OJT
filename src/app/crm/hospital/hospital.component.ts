@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/auth/user.service';
 import { Hospital } from '../hospital';
 import { HospitalService } from '../hospital.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { MatSort, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -33,9 +36,16 @@ export class HospitalComponent {
     'delete'
     ];
 
+  dataSource!:MatTableDataSource<Hospital>; 
+
   private searchTerms = new Subject<string>();
 
-  constructor(private userService:UserService, private hospitalService:HospitalService, private router:Router ) { }
+  constructor(
+    private userService:UserService, 
+    private hospitalService:HospitalService, 
+    private router:Router,
+    private _liveAnnouncer: LiveAnnouncer
+    ) { }
 
   ngOnInit() {
     console.log(this.userService.isLoggedIn);
@@ -43,17 +53,12 @@ export class HospitalComponent {
     this.getHospitals();
     this.countHospital = this.hospitals$.length;
     this.hospitals$ = this.hospitals$.reverse();
-    // console.log(this.hospitals$)
-    // this.hospitals$ = this.searchTerms.pipe(
-    //   // wait 300ms after each keystroke before considering the term
-    //   debounceTime(300),
+    this.dataSource = new MatTableDataSource(this.hospitals$)
+  }
 
-    //   // ignore new term if same as previous term
-    //   distinctUntilChanged(),
-
-    //   // switch to new search observable each time the term changes
-    //   // switchMap((term: string) => this.heroService.searchHeroes(term))
-    // );
+  @ViewChild(MatSort) sort!: MatSort;
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 
   logout(){
@@ -70,5 +75,17 @@ export class HospitalComponent {
 
   search(term: string) : void{
     this.searchTerms.next(term);
+  }
+
+  announceSortChange(sortState: Sort) {
+    // This example uses English messages. If your application supports
+    // multiple language, you would internationalize these strings.
+    // Furthermore, you can customize the message to add additional
+    // details about the values being sorted.
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
 }

@@ -25,6 +25,9 @@ import { ListComponent } from './crm/hospital/list/list.component';
 import { CrmBarComponent } from './crm/crm-bar/crm-bar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import { MatTableModule } from '@angular/material/table';
     MatButtonModule,
     MatIconModule,
     MatTableModule,
+    MatTabsModule,
+    MatSelectModule,
+    MatSortModule,
 
     // browser
     BrowserModule,

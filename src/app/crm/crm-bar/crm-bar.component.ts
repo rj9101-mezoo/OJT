@@ -12,7 +12,7 @@ export class CrmBarComponent {
   constructor(private userService:UserService) { }
 
   ngOnInit() {
-    console.log(window.location.pathname.split('/').slice(-1)[0])
+    // console.log(window.location.pathname.split('/').slice(-1)[0])
   }
 
   logout(){

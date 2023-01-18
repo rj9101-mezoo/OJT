@@ -15,7 +15,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:2,
-      hospitalName: "TEST1",
+      hospitalName: "TEST2",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -27,7 +27,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:3,
-      hospitalName: "TEST1",
+      hospitalName: "TEST3",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -39,7 +39,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:4,
-      hospitalName: "TEST1",
+      hospitalName: "TEST4",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -51,7 +51,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:5,
-      hospitalName: "TEST1",
+      hospitalName: "TEST5",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -63,7 +63,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:6,
-      hospitalName: "TEST1",
+      hospitalName: "TEST6",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -75,7 +75,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:7,
-      hospitalName: "TEST1",
+      hospitalName: "TEST7",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -87,7 +87,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:8,
-      hospitalName: "TEST1",
+      hospitalName: "TEST8",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -99,7 +99,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:9,
-      hospitalName: "TEST1",
+      hospitalName: "TEST9",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -111,7 +111,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:10,
-      hospitalName: "TEST1",
+      hospitalName: "TEST10",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -123,7 +123,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:11,
-      hospitalName: "TEST1",
+      hospitalName: "TEST11",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -135,7 +135,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:12,
-      hospitalName: "TEST1",
+      hospitalName: "TEST12",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -147,7 +147,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:13,
-      hospitalName: "TEST1",
+      hospitalName: "TEST13",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -159,7 +159,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:14,
-      hospitalName: "TEST1",
+      hospitalName: "TEST14",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -171,7 +171,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:15,
-      hospitalName: "TEST1",
+      hospitalName: "TEST15",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -183,7 +183,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:16,
-      hospitalName: "TEST1",
+      hospitalName: "TEST16",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -195,7 +195,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:17,
-      hospitalName: "TEST1",
+      hospitalName: "TEST17",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -207,7 +207,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:18,
-      hospitalName: "TEST1",
+      hospitalName: "TEST18",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -219,7 +219,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:19,
-      hospitalName: "TEST1",
+      hospitalName: "TEST19",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -231,7 +231,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:20,
-      hospitalName: "TEST1",
+      hospitalName: "TEST20",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -243,7 +243,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:21,
-      hospitalName: "TEST1",
+      hospitalName: "TEST21",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -255,7 +255,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:22,
-      hospitalName: "TEST1",
+      hospitalName: "TEST22",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -267,7 +267,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:23,
-      hospitalName: "TEST1",
+      hospitalName: "TEST23",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -279,7 +279,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:24,
-      hospitalName: "TEST1",
+      hospitalName: "TEST24",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -291,7 +291,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:25,
-      hospitalName: "TEST1",
+      hospitalName: "TEST25",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
@@ -303,7 +303,7 @@ export const HOSPITALS:Hospital[] = [
     },
     {
       index:26,
-      hospitalName: "TEST1",
+      hospitalName: "TEST26",
       registrationDate: "Jul 8, 2022, 12:01:52 PM",
       numberOfBeds:256,
       numberOfDevice:253,
