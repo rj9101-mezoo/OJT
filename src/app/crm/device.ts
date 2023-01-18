@@ -1,4 +1,4 @@
-export interface Hospital{
+export interface Device{
     index:number,
     hicardiName:string,
     deviceType:string,
