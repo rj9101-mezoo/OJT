@@ -1,0 +1,12 @@
+.content{
+    height: 100%;
+    background-color: #f0f1f4;
+    padding: 2% 25%;
+}
+
+.mat-card{
+    height: 100%;
+    display: grid;
+    grid-template-rows: 15% 75% 10%;
+    padding: 1rem 3rem;
+}

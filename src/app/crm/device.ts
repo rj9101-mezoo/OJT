@@ -5,7 +5,7 @@ export interface Device{
     hospital:string,
     bedNo:string,
     macAddress:string,
-    registrationDate:string,
-    lastConnectionDate:string,
+    registeredDate:string,
+    lastConnectedDate:string,
     checked:boolean
 }

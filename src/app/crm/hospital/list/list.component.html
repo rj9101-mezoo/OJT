@@ -4,7 +4,7 @@
         <div class="select-hospital">
             <div class="header">Hospital :&nbsp;</div>
             <mat-select [(value)]="selected">
-                <mat-option *ngFor="let hospital of hospitals" [value]="hospital.index">
+                <mat-option *ngFor="let hospital of hospitals" [value]="hospital._id">
                     <p style="color:black">{{hospital.hospitalName}}</p>
                 </mat-option>
             </mat-select>
@@ -133,10 +133,9 @@
                             <!-- Name Column -->
                             <ng-container matColumnDef="hicardiName">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by hicardiName">Hospital Name</th>
+                                    sortActionDescription="Sort by hicardiName">Hicardi Name</th>
                                 <td mat-cell *matCellDef="let element">
                                     {{element.hicardiName}}
-                                    <span *ngIf="element.self" class="self">self</span>
                                 </td>
                             </ng-container>
 
@@ -170,16 +169,16 @@
                             </ng-container>
 
                             <!-- Symbol Column -->
-                            <ng-container matColumnDef="registrationDate">
+                            <ng-container matColumnDef="registeredDate">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by registrationDate">Registration Date</th>
-                                <td mat-cell *matCellDef="let element">{{element.registrationDate}}</td>
+                                    sortActionDescription="Sort by registeredDate">Registration Date</th>
+                                <td mat-cell *matCellDef="let element">{{element.registeredDate | date:'medium'}}</td>
                             </ng-container>
 
-                            <ng-container matColumnDef="lastConnectionDate">
+                            <ng-container matColumnDef="lastConnectedDate">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by lastConnectionDate">Last Connection Date</th>
-                                <td mat-cell *matCellDef="let element">{{element.lastConnectionDate}}</td>
+                                    sortActionDescription="Sort by lastConnectedDate">Last Connection Date</th>
+                                <td mat-cell *matCellDef="let element">{{element.lastConnectedDate | date:'medium'}}</td>
                             </ng-container>
 
 
@@ -299,16 +298,16 @@
                             </ng-container>
     
                             <!-- Symbol Column -->
-                            <ng-container matColumnDef="registrationDate">
+                            <ng-container matColumnDef="registeredDate">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by registrationDate">Registration Date</th>
-                                <td mat-cell *matCellDef="let element">{{element.registrationDate}}</td>
+                                    sortActionDescription="Sort by registeredDate">Registration Date</th>
+                                <td mat-cell *matCellDef="let element">{{element.registeredDate| date:'medium'}}</td>
                             </ng-container>
     
-                            <ng-container matColumnDef="lastConnectionDate">
+                            <ng-container matColumnDef="lastConnectedDate">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by lastConnectionDate">Last Connection Date</th>
-                                <td mat-cell *matCellDef="let element">{{element.lastConnectionDate}}</td>
+                                    sortActionDescription="Sort by lastConnectedDate">Last Connection Date</th>
+                                <td mat-cell *matCellDef="let element">{{element.lastConnectedDate| date:'medium'}}</td>
                             </ng-container>
     
     
@@ -321,9 +320,7 @@
             </div>
         </mat-tab>
         <mat-tab label="Information">
-            <div class="content">
-
-            </div>
+            <app-information></app-information>
         </mat-tab>
     </mat-tab-group>
 </div>

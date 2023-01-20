@@ -1,20 +1,55 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, mergeMap, Observable, of, tap } from 'rxjs';
+import { apiHttpServer } from 'src/url';
 import { Device } from './device';
 import { DEVICES } from './mock-devices';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeviceService {
   private devices!: Observable<Device[]>
+  private accuntId:any  = localStorage.getItem('id');
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  getDevices(): Observable<Device[]> {
-    this.devices = of(DEVICES);
+  getDevices(id:string): Observable<Device[]> {
+    const test1 = this.http.get(`${apiHttpServer}/groups/get-group/${id}`,{
+      params:{
+        accountId: this.accuntId
+    }})
+  const test2 = test1.pipe(
+    mergeMap((h:any)=> this.http.get(`${apiHttpServer}/devices`,{
+      params:{
+        accountId: this.accuntId
+    }}).pipe(
+        map((x:any)=>x.data.filter((d:any)=>h.data.devices.includes(d._id))),
+        tap(x=>console.log(x)),
+        map(d=>d.map((d:any, i:any)=>{
+          return {
+            index: i,
+            hicardiName: d.peripheral.name,
+            deviceType:"RealTime",
+            hospital:h.data.hospital,
+            macAddress:d.peripheral.id,
+            registeredDate:d.registeredDate,
+            lastConnectedDate:d.lastConnectedDate
+          }
+        }))
+      )
+    )
+  )
+  const test3 = this.http.get(`${apiHttpServer}/spaces`,{
+    params:{
+      accountId: this.accuntId
+  }})
 
-    return this.devices;
+  test3.subscribe(x=>console.log(x))
+
+    return test2;
   }
 
   private handleError<T>(operation = 'operation', result?: T){

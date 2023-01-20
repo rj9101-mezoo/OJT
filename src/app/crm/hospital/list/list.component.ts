@@ -18,7 +18,7 @@ import { DEVICES } from '../../mock-devices';
 export class ListComponent {
   hospitals:Hospital[] = [];
   selected!:string;
-  hospital!:Hospital;
+  hospital!:any;
   devices:Device[] = [];
   displayedColumns: string[] = [
     'check',
@@ -28,8 +28,8 @@ export class ListComponent {
     'hospital',
     'bedNo',
     'macAddress',
-    'registrationDate',
-    'lastConnectionDate'
+    'registeredDate',
+    'lastConnectedDate'
     ];
   dataSource!: MatTableDataSource<Device>
   checkColor:string =  'accent';
@@ -57,7 +57,7 @@ export class ListComponent {
 
   getHospital():void{
     this.selected=String(this.route.snapshot.paramMap.get('id'));
-    this.hospitalService.getHospital(this.selected)
+    this.hospitalService.getHospital(this.selected).subscribe(data =>console.log(data));
   }
 
   getHospitals():void{
@@ -67,8 +67,13 @@ export class ListComponent {
   }
 
   getDevices():void{
-    // this.deviceService.getDevices().subscribe(devices=> this.devices = devices)
-    this.devices = DEVICES;
+    this.selected=String(this.route.snapshot.paramMap.get('id'));
+    this.deviceService.getDevices(this.selected).subscribe(devices=>{ 
+      this.devices = devices;
+      console.log(this.devices);
+      this.dataSource = new MatTableDataSource(this.devices);
+    })
+    // this.devices = DEVICES;
   }
 
   moveDetail(id:number){

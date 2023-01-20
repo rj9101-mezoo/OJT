@@ -29,8 +29,10 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
+import { InformationComponent } from './crm/hospital/information/information.component'; 
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { HttpClientModule } from '@angular/common/http';
     AgencyComponent,
     PointComponent,
     ListComponent,
-    CrmBarComponent
+    CrmBarComponent,
+    InformationComponent
   ],
   imports: [
     // material style
@@ -61,6 +64,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     MatSortModule,
     MatCheckboxModule,
+    MatDatepickerModule,
 
     // browser
     BrowserModule,
