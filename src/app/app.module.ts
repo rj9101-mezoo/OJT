@@ -28,6 +28,9 @@ import { MatTableModule } from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+import { HttpClientModule } from '@angular/common/http'; 
 
 @NgModule({
   declarations: [
@@ -57,6 +60,7 @@ import {MatSortModule} from '@angular/material/sort';
     MatTabsModule,
     MatSelectModule,
     MatSortModule,
+    MatCheckboxModule,
 
     // browser
     BrowserModule,
@@ -64,6 +68,7 @@ import {MatSortModule} from '@angular/material/sort';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

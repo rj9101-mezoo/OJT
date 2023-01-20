@@ -9,7 +9,8 @@ export const DEVICES:Device[] = [
         bedNo:"TEST1 (63 - 4)",
         macAddress:"AB:CC:9D:3C:7C:69",
         registrationDate:"Apr 28, 2022, 6:57:43 PM",
-        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM"
+        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM",
+        checked:false,
     },
     {
         index:2,
@@ -19,7 +20,8 @@ export const DEVICES:Device[] = [
         bedNo:"TEST1 (63 - 4)",
         macAddress:"AB:CC:9D:3C:7C:69",
         registrationDate:"Apr 28, 2022, 6:57:43 PM",
-        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM"
+        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM",
+        checked:false,
     },
     {
         index:3,
@@ -29,7 +31,8 @@ export const DEVICES:Device[] = [
         bedNo:"TEST1 (63 - 4)",
         macAddress:"AB:CC:9D:3C:7C:69",
         registrationDate:"Apr 28, 2022, 6:57:43 PM",
-        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM"
+        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM",
+        checked:false,
     },
     {
         index:4,
@@ -39,7 +42,8 @@ export const DEVICES:Device[] = [
         bedNo:"TEST1 (63 - 4)",
         macAddress:"AB:CC:9D:3C:7C:69",
         registrationDate:"Apr 28, 2022, 6:57:43 PM",
-        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM"
+        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM",
+        checked:false,
     },
     {
         index:5,
@@ -49,7 +53,8 @@ export const DEVICES:Device[] = [
         bedNo:"TEST1 (63 - 4)",
         macAddress:"AB:CC:9D:3C:7C:69",
         registrationDate:"Apr 28, 2022, 6:57:43 PM",
-        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM"
+        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM",
+        checked:false,
     },
     {
         index:6,
@@ -59,7 +64,8 @@ export const DEVICES:Device[] = [
         bedNo:"TEST1 (63 - 4)",
         macAddress:"AB:CC:9D:3C:7C:69",
         registrationDate:"Apr 28, 2022, 6:57:43 PM",
-        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM"
+        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM",
+        checked:false,
     },
     {
         index:7,
@@ -69,7 +75,8 @@ export const DEVICES:Device[] = [
         bedNo:"TEST1 (63 - 4)",
         macAddress:"AB:CC:9D:3C:7C:69",
         registrationDate:"Apr 28, 2022, 6:57:43 PM",
-        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM"
+        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM",
+        checked:false,
     },
     {
         index:8,
@@ -79,7 +86,8 @@ export const DEVICES:Device[] = [
         bedNo:"TEST1 (63 - 4)",
         macAddress:"AB:CC:9D:3C:7C:69",
         registrationDate:"Apr 28, 2022, 6:57:43 PM",
-        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM"
+        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM",
+        checked:false,
     },
     {
         index:9,
@@ -89,7 +97,8 @@ export const DEVICES:Device[] = [
         bedNo:"TEST1 (63 - 4)",
         macAddress:"AB:CC:9D:3C:7C:69",
         registrationDate:"Apr 28, 2022, 6:57:43 PM",
-        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM"
+        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM",
+        checked:false,
     },
     {
         index:10,
@@ -99,6 +108,7 @@ export const DEVICES:Device[] = [
         bedNo:"TEST1 (63 - 4)",
         macAddress:"AB:CC:9D:3C:7C:69",
         registrationDate:"Apr 28, 2022, 6:57:43 PM",
-        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM"
+        lastConnectionDate:"Jan 9, 2023, 5:51:16 PM",
+        checked:false,
     },
   ]

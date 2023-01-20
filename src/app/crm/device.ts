@@ -6,5 +6,6 @@ export interface Device{
     bedNo:string,
     macAddress:string,
     registrationDate:string,
-    lastConnectionDate:string
+    lastConnectionDate:string,
+    checked:boolean
 }

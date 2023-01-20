@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild} from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/auth/user.service';
 import { Hospital } from '../hospital';
@@ -21,59 +21,62 @@ export class HospitalComponent {
     Left: 9132,
     Total: 10504
   }
-  countHospital!:number;
+  countHospital!: number;
 
-  hospitals$:Hospital[] = [];
+  hospitals: Hospital[] = [];
   displayedColumns: string[] = [
     'index',
     'hospitalName',
     'registrationDate',
-    'numberOfBeds',
-    'numberOfDevice',
-    'numberOfAllocatedDevice',
+    'numOfBeds',
+    'numOfDevice',
+    'numOfAllocatedDevice',
     'roomName',
     'status',
     'delete'
-    ];
+  ];
 
-  dataSource!:MatTableDataSource<Hospital>; 
+  dataSource!: MatTableDataSource<Hospital>;
 
   private searchTerms = new Subject<string>();
 
   constructor(
-    private userService:UserService, 
-    private hospitalService:HospitalService, 
-    private router:Router,
+    private userService: UserService,
+    private hospitalService: HospitalService,
+    private router: Router,
     private _liveAnnouncer: LiveAnnouncer
-    ) { }
+  ) { }
 
   ngOnInit() {
-    console.log(this.userService.isLoggedIn);
-
     this.getHospitals();
-    this.countHospital = this.hospitals$.length;
-    this.hospitals$ = this.hospitals$.reverse();
-    this.dataSource = new MatTableDataSource(this.hospitals$)
+    this.countHospital = this.hospitals.length;
+    this.dataSource = new MatTableDataSource(this.hospitals)
   }
 
   @ViewChild(MatSort) sort!: MatSort;
   ngAfterViewInit() {
+    console.log(this.sort)
     this.dataSource.sort = this.sort;
   }
 
-  logout(){
+  logout() {
     this.userService.logout();
   }
 
-  getHospitals():void{
-    this.hospitalService.getHospitals().subscribe(hospitals=> this.hospitals$ = hospitals)
+  getHospitals(): void {
+    this.hospitalService.getHospitals().subscribe(hospitals => {
+      this.hospitals = hospitals;
+      this.hospitals.reverse();
+      this.countHospital = this.hospitals.length;
+      this.dataSource = new MatTableDataSource(this.hospitals);
+    });
   }
 
-  moveDetail(id:number){
+  moveDetail(id: number) {
     this.router.navigate([`/crm/hospital/${id}`]);
   }
 
-  search(term: string) : void{
+  search(term: string): void {
     this.searchTerms.next(term);
   }
 
@@ -83,6 +86,7 @@ export class HospitalComponent {
     // Furthermore, you can customize the message to add additional
     // details about the values being sorted.
     if (sortState.direction) {
+      console.log(sortState)
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
       this._liveAnnouncer.announce('Sorting cleared');

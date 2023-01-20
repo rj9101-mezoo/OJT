@@ -159,6 +159,11 @@
     white-space: nowrap;
 }
 
+::ng-deep .mat-mdc-cell .mat-mdc-button:hover{
+    background-color: red !important;
+    color:white !important;
+}
+
 .mat-column-index {
     padding: 24px;
 }

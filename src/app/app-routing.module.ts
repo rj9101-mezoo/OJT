@@ -20,9 +20,9 @@ const routes: Routes = [
   { path: 'history', component: HistoryComponent, canActivate: [AuthGuard]},
   { path: 'manual', component: ManualComponent, canActivate: [AuthGuard]},
   { path: 'setting', component: SettingComponent, canActivate: [AuthGuard]},
-  { path: 'crm', component: CrmComponent},
-  { path: 'crm/hospital', component: HospitalComponent},
-  { path: 'crm/hospital/:id', component: ListComponent},
+  { path: 'crm', component: CrmComponent, canActivate: [AuthGuard]},
+  { path: 'crm/hospital', component: HospitalComponent, canActivate: [AuthGuard]},
+  { path: 'crm/hospital/:id', component: ListComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: ''}
 ]
 

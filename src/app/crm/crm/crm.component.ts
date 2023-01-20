@@ -10,7 +10,7 @@ export class CrmComponent implements OnInit {
   constructor(private userService:UserService) { }
 
   ngOnInit() {
-    console.log(this.userService.isLoggedIn)
+    // console.log(this.userService.isLoggedIn)
   }
 
   logout(){
