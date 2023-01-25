@@ -1,0 +1,20 @@
+.wrapper{
+    background-color: #000;
+    color: #fff;
+    font-weight: 200;
+    font-size: .7rem;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hospital_info{
+    
+}
+
+.mezoo_info{
+
+}

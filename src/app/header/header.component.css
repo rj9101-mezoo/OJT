@@ -1,8 +1,115 @@
-nav{
+.wrapper {
     background-color: black;
-    color:white;
+    color: white;
+    height: 6%;
+    display: grid;
+    grid-template-columns: 43% 14% 43%;
+    align-items: center;
 }
 
-.selected{
-    color: #f72b93;
+.wrapper .toolbar{
+    padding: 0 16px;
+}
+
+.wrapper .toolbar .mat-mdc-button{
+    margin-right: 20px;
+    font-size: .6vmax;
+}
+
+.selected {
+    color: #f72b93 !important;
+    border-bottom: 2px solid #f72b93;
+    border-radius: 0px !important;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time {
+    color: #fff;
+    font-size: 1vw;
+    /* font-weight: bold;; */
+}
+
+.option {
+    display: flex;
+    justify-content: flex-end;
+    height: 50%;
+}
+
+.speaker {
+    text-align: center;
+    color: #38e8fc;
+    border: 2px solid #38e8fc;
+    margin-right: 1%;
+}
+
+.speaker svg{
+    fill: #38e8fc;
+}
+
+.alarm {
+    text-align: center;
+    border: 2px solid #ffcb00;
+    color:#ffcb00;
+}
+
+.alarm.on{
+    fill: #ffcb00;
+}
+
+.alarm.off{
+    fill: red;
+    color: red;
+    background-color: #ffcb00;
+    font-weight: bold;
+}
+
+.action_btn{
+    width: 20%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 100%;
+    align-items: center;
+    justify-content: center;
+    font-size: .6vmax;
+    cursor: pointer;
+    padding-left: 1%;
+    padding-right: 1%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: 400;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.bedViewOption {
+    background: #585858;
+    color: #fff;
+    padding: 0;
+    border-radius: 5px;
+    border: 1px solid #4c4c4c;
+    width: 6vw;
+    justify-content: center;
+    margin-left: 1%;
+    font-size: .6vmax;
+    display: flex;
+    align-items: center;
+}
+
+.bedViewOption .mat-form-field-underline {
+    display: none;
+}
+
+.mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
 }

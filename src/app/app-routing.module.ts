@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'crm', component: CrmComponent, canActivate: [AuthGuard]},
   { path: 'crm/hospital', component: HospitalComponent, canActivate: [AuthGuard]},
   { path: 'crm/hospital/:id', component: ListComponent, canActivate: [AuthGuard]},
+  { path: 'monitor', component: ListComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: ''}
 ]
 

@@ -1,0 +1,324 @@
+.space_central{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 1px solid hsla(0,0%,100%,.2);
+    position: relative;
+    overflow: hidden;
+}
+.bed4{
+    grid-template-rows: 10% auto 10%;
+}
+
+.bed8{
+    grid-template-rows: 10% auto 10%;
+}
+
+.bed16{
+    grid-template-rows: 16% auto 16%;
+}
+
+.bed32{
+    grid-template-rows: 16% auto 16%;
+}
+
+.space_central .header{
+    border-bottom: 1px solid hsla(0,0%,100%,.5);
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 8% 11% 30% 38% 13%;
+    grid-template-rows: 100%;
+    text-align: center;
+    justify-items: center;
+    color: #b4b4b4;
+    fill: #b4b4b4;
+    position: relative;
+}
+
+.space_central .header .space_name{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.space_central .header .device_name{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.space_central .header .patient_name{
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-top: 3px;
+
+}
+
+.space_central .header .patientBtn{
+    width:60%;
+    height: 100%;
+    outline: none;
+    line-height: 1rem;
+    border: 1px solid hsla(0,0%,100%,.7);
+    padding: 0;
+    background-color: rgba(0,0,0,.7);
+    color: hsla(0,0%,100%,.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.space_central .header .alarmHeader{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.space_central .header .history{
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px;
+}
+
+.space_central .header .history button{
+    height: 90%;
+    width: 100%;
+    line-height: .8rem;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border: 1px solid hsla(0,0%,100%,.5);
+    background-color: rgba(108,122,137,.2);
+}
+
+.no-patient{
+    position: absolute;
+    z-index: 21;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,.7);
+}
+
+.content{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.content path{
+    fill: transparent;
+}
+
+.no-patient:hover path{
+    fill:white;
+    fill-opacity: 0.7;
+}
+
+.no-patient:hover .text{
+    color:white;
+    opacity:0.7;
+}
+
+.no-patient button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 10px;
+    outline: none;
+    margin-bottom: 3%;
+    padding: none;
+    min-width: none;
+    min-height: none;
+    width: 51px;
+    height: 51px;
+    color:transparent;
+}
+
+.no-patient .text{
+    padding-top: 5px!important;
+    /* user-select: none; */
+    text-align: center;
+    color: transparent;
+    line-height: 1.5rem;
+}
+
+.priorityBorderBox{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.space_central .charts{
+    display: grid;
+    height: 100%;
+}
+
+/* .space_central .charts{
+    display: grid;
+    height: 100%;
+} */
+.real_time_chart {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding-left: 5px;
+}
+
+.title{
+    color:#2eb337;
+}
+
+.bedOption_4_chart .charts{
+    grid-template-columns: 70% 18% 12%;
+}
+
+.bedOption_8_chart .charts{
+    grid-template-columns: 100%;
+    grid-template-rows: 60% 40%;
+}
+
+.bedOption_8_chart .charts .trend_charts{
+    grid-template-columns: 50% 50%;
+}
+
+.space_central .charts .trend_charts{
+    display: grid;
+    height: 100%;
+    padding-right: 1%;
+    border-left: 1px solid hsla(0,0%,100%,.2);
+    border-top: 0.04vw solid hsla(0,0%,100%,.2);
+}
+
+.waveform_chart .real_time_chart :first-child{
+    border-right: 0.04vw solid hsla(0,0%,100%,.2);
+}
+
+.space_central .footer{
+    position: relative;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 100%;
+    border-top: 0.04vw solid hsla(0,0%,100%,.5);
+}
+
+.space_central .bedOption_4_footer{
+    grid-template-columns: 5% 10% 25% auto 25% 10%;
+}
+
+.space_central .bedOption_8_footer{
+    grid-template-columns: 10% 18% 38% auto 24% 10%;
+}
+
+.footer .print{
+    /* z-index: 30; */
+    min-width: none;
+    min-height: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0!important;
+    border: 1px solid hsla(0,0%,100%,.15);
+    background-color: hsla(0,0%,100%,.15);
+    outline: none;
+    color: #b4b4b4;
+}
+
+.footer .print svg{
+    fill: #b4b4b4;
+}
+
+.footer .motionStatus div{
+    position: relative;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 0.04vw solid hsla(0,0%,100%,.2);
+    box-sizing: border-box;
+}
+
+.footer .motionStatus div svg{
+    position: absolute;
+    height: 1.5vmin;
+    fill: hsla(0,0%,100%,.17);
+}
+
+.footer .battery{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    white-space: nowrap;
+    color: hsla(0,0%,100%,.7);
+}
+
+.footer .battery .hicardi_battery{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 4%;
+}
+
+.footer .battery .gateway_battery{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 4%;
+}
+
+.footer .battery .bluetooth{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 4%;
+    line-height: 1vmin;
+}
+
+.footer .setting{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    text-align: center;
+}
+
+.footer .setting button{
+    font-size: .5vmax;
+    font-weight: 400;
+    line-height: 1rem;
+    outline: none;
+    z-index: 12;
+    color: #b4b4b4;
+    border: 1px solid hsla(0,0%,100%,.15);
+    background-color: hsla(0,0%,100%,.15);
+    margin: 0;
+    padding: 0;
+    min-width: 100%!important;
+}

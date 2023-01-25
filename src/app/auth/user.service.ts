@@ -35,7 +35,7 @@ export class UserService {
           localStorage.setItem('loggedIn', "true")
           // this.loggedIn = true;
           if (x.data.hospitalId) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/monitor']);
           } else {
             this.router.navigate(['/crm']);
           }

@@ -30,9 +30,13 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatRippleModule} from '@angular/material/core';
 
 import { HttpClientModule } from '@angular/common/http';
-import { InformationComponent } from './crm/hospital/information/information.component'; 
+import { InformationComponent } from './crm/hospital/information/information.component';
+import { GroupsComponent } from './home/monitor/groups/groups.component';
+import { FooterComponent } from './footer/footer.component';
+import { SpaceCentralComponent } from './home/monitor/groups/space-central/space-central.component'; 
 
 @NgModule({
   declarations: [
@@ -50,7 +54,10 @@ import { InformationComponent } from './crm/hospital/information/information.com
     PointComponent,
     ListComponent,
     CrmBarComponent,
-    InformationComponent
+    InformationComponent,
+    GroupsComponent,
+    FooterComponent,
+    SpaceCentralComponent
   ],
   imports: [
     // material style
@@ -65,6 +72,7 @@ import { InformationComponent } from './crm/hospital/information/information.com
     MatSortModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    MatRippleModule,
 
     // browser
     BrowserModule,
