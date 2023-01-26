@@ -39,9 +39,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn$ = this.userService.isLoggedIn;
-    console.log(window.location.pathname.split('/')[1])
-    console.log(this.test)
-    console.log(this.test === this.heads[0].path)
     this.getBeds();
     // const number = interval(1000).pipe(
     //   this.timer()

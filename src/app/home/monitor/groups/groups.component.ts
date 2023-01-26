@@ -12,6 +12,8 @@ import { wsServer } from 'src/url';
 })
 export class GroupsComponent implements OnInit {
   websocket!:WebSocket;
+  subject = webSocket(wsServer);
+  data1:number[] = [];
 
   constructor(
     private monitorService: MonitorService,
@@ -19,61 +21,70 @@ export class GroupsComponent implements OnInit {
   ) { 
   }
 
-  onpenWebsocketConnection(){
-    this.websocket = new WebSocket(wsServer)
+  // onpenWebsocketConnection(){
+  //   this.websocket = new WebSocket(wsServer)
 
-    this.websocket.onopen = (e) => {
-      console.log(e);
-    }
+  //   this.websocket.onopen = (e) => {
+  //     console.log(e);
+  //   }
 
-    this.websocket.onmessage = (e) =>{
-      console.log(e.data);
-    }
+  //   this.websocket.onmessage = (e) =>{
+  //     console.log(JSON.parse(e.data).data.dataSet);
+  //   }
 
-    this.websocket.onclose = (e) =>{
-      console.log(e);
-    }
-  }
+  //   this.websocket.onclose = (e) =>{
+  //     console.log(e);
+  //   }
+  // }
 
-  sendWebsocketMessage(){
-    this.websocket.send(JSON.stringify(
-      {
-        requestId:this.makeUuid(),
-        method:'PUT',
-        macs:[ "F2:79:B7:F0:D6:42"]
-      }
-    ))
-  }
+  // sendWebsocketMessage(){
+  //   this.websocket.send(JSON.stringify(
+  //     {
+  //       requestId:this.makeUuid(),
+  //       method:'PUT',
+  //       macs:[ "F2:79:B7:F0:D6:42"]
+  //     }
+  //   ))
+  // }
+
   ngOnInit(): void {
-    // console.log(this.websocketService)
-    // console.log(this.ws);
-    // console.log(this.makeUuid());
-    // console.log(this.connect());
-    const subject = webSocket(wsServer)
-    console.log(subject)
-    subject.subscribe(x=>console.log(x));
-    subject.next({message:{
+    // const observableA = this.subject.multiplex(
+    //   ()=>({subscibe: "a"}),
+    //   () => ({unsubscribe: "a"}),
+    //   (msg:any) => msg.type==='a'
+    // )
+    // const observableB = this.subject.multiplex(
+    //   ()=>({subscibe: "b"}),
+    //   () => ({unsubscribe: "b"}),
+    //   (msg:any) => msg.type==='b'
+    // )
+
+    // observableA.subscribe(
+    //   msg => console.log(`A:${msg}`)
+    //   )
+    // observableB.subscribe(msg => console.log(`B:${msg}`))
+
+    // observableA.send({
+    //   requestId:this.makeUuid(),
+    //   method:'PUT',
+    //   macs:[ "F2:79:B7:F0:D6:42"]
+    // })
+    this.subject.subscribe({
+      next: (msg:any) => {this.data1 = msg.data?.dataSet.map((a:any)=>a.AB.AA.CAC).flat();console.log(this.data1)},
+      error: err => console.log(err),
+      complete: () => console.log('complete')
+    })
+    this.send();
+  }
+
+  send(){
+    // this.subject.subscribe();
+    this.subject.next({
       requestId:this.makeUuid(),
       method:'PUT',
       macs:[ "F2:79:B7:F0:D6:42"]
-    }})
-    subject.complete();
-    subject.error({ code: 4000, reason: 'I think our app just broke!' });
-
-    this.onpenWebsocketConnection();
-    // interval(1000).pipe(take(1)).subscribe(x=>{this.sendWebsocketMessage()})
-    // this.sendWebsocketMessage()
-    // this.ws.onopen = (e) => {
-    //   console.log(e);
-    // }
-
-    // this.ws.onmessage = (e) =>{
-    //   console.log(e);
-    // }
-
-    // this.ws.onclose = (e) =>{
-    //   console.log(e);
-    // }
+    })
+    // this.subject.complete();
   }
 
 
