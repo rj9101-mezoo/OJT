@@ -70,7 +70,10 @@ export class GroupsComponent implements OnInit {
     //   macs:[ "F2:79:B7:F0:D6:42"]
     // })
     this.subject.subscribe({
-      next: (msg:any) => {this.data1 = msg.data?.dataSet.map((a:any)=>a.AB.AA.CAC).flat();console.log(this.data1)},
+      next: (msg:any) => {
+        this.data1 = msg.data?.dataSet.map((a:any)=>a.AB.AA.CAC).flat();
+        // console.log(this.data1)
+      },
       error: err => console.log(err),
       complete: () => console.log('complete')
     })

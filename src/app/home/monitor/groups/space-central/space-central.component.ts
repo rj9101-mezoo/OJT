@@ -19,18 +19,18 @@ export class SpaceCentralComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBeds();
-    let data:number[] = [];
-    d3.json("/assets/data/test.json")
-    .then((d:any) => {
-      data = (d.flat());
-    });
-    let n = 0;
+
+    let n = 745;
     const canvas = d3.select('.time_chart');
     const width = document.querySelector('.time_chart')?.clientWidth;
     // const height = document.querySelector('.time_chart')?.getBoundingClientRect().height;
-    const height = 300;
+    const height = document.querySelector('.time_chart')?.getBoundingClientRect().height;
+    var data: any = d3.range(n).map(() => 32500);
+    var arr:any=[];
+    var dumy:any=[];
 
-    console.log(height)
+    let count = -5;
+    let init = 0;
 
     const svg = canvas.append('svg')
       .attr('width', width ? width : 0)
@@ -49,13 +49,19 @@ export class SpaceCentralComponent implements OnInit {
       .range([0, graphWidth])
 
     var axisY = d3.scaleLinear()
-      .domain([32450, 32550])
+      .domain([32400, 32500])
       .range([graphHeight, 0])
 
     const line: any = d3.line()
       .x(function (d, i) { return axisX(now - (n - 1 - i) * duration); })
-      .y(function (d: any, i) { return axisY(d); })
-      .curve(d3.curveBumpY);
+      .y(function (d: any, i):any { 
+        if(d)
+          return axisY(d); 
+        else
+          return null;
+      })
+      .curve(d3.curveBumpY)
+      .defined(((d:any)=>d));
 
       const graph = svg. append('g')
       .attr('width', graphWidth)
@@ -74,60 +80,74 @@ export class SpaceCentralComponent implements OnInit {
       .attr('class', 'x axis')
       .attr('fill', 'green')
       .attr('color', 'green')
-      .call(d3.axisLeft(axisY))
+      // .call(d3.axisLeft(axisY))
 
       const lineChart = graph.append('g')
       .attr('class', 'chart')
       .attr('transform', `translate(100,0)`);
       
       lineChart.append("path") // path: 실제 데이터 구현 부
-      .datum(this.state)
+      .datum(data)
       .attr('class', 'test')
       .attr('fill', 'none')
-      .attr('stroke', 'green')
-      .attr('stroke-width', '1.5px')
-      .attr('transform', 'translate(100,0)')
-      .attr('d', line(this.state))
+      .attr('stroke', 'rgb(66, 255, 79)')
+      .attr('stroke-width', '2')
+      .attr('transform', 'translate(-100,0)')
+      .attr('d', line(data))
+
+      const test = [1,2,3,4,5,6,7,8];
+      test.splice(6,5)
+      console.log(test)
 
       const result = interval(40)
        .subscribe(x=> {
-        // if(data.length)
-        n = data.length/2;
         d3.select('.test').remove()
         d3.select('.rect').remove()
 
+        // count+=5;
+        if(this.state){
+          count+=5;
+          arr=this.state;
+        }
 
-        // data.splice(0,-1);
-
-        // data[count%n]= (Math.random() * 100)
-        // // data[count+1%n]= (Math.random() * 100)
-        // // data[count+2%n]= (Math.random() * 100)
-        // // data[count+3%n]= (Math.random() * 100)
-        // // data[count+4%n]= (Math.random() * 100)
-        // count+=1;
-
-        // data.reverse();
-        
+        if(arr.length!==0){
+          if(count-init === arr.length)
+            init = count;
+          dumy = [...arr];
+          data.splice((count%n),5, ...dumy.splice(count-init,5))
+          if(count%n+10<n)
+            data.splice((count%n)+5, 10, ...(new Array(10).fill(null)))
+        }else{
+          init = count;
+          // data.splice((count%n),5, ...(new Array(10).fill(32500)))     
+        }
+        console.log(data);
         now = new Date();
         axisX.domain([now - (n - 2) * duration, now - duration]);
         axisY.domain([d3.min(data) as any, d3.max(data) as any]);
 
-        // axis.transition() // x축 설정, transition화
-        //     .duration(0)
-        //     .ease(d3.easeLinear)
-            // .call(d3.axisBottom(axisX));
 
 
         lineChart.append("path") // path: 실제 데이터 구현 부
        .datum(data)
        .attr('class', 'test')
        .attr('fill', 'none')
-       .attr('stroke', 'green')
+       .attr('stroke', 'rgb(66, 255, 79)')
        .attr('stroke-width', '1.5px')
-       .attr('transform', 'translate(-100,0)')
+       .attr('transform', 'translate(-150,0)')
        .attr('d', line(data))
 
+      //  lineChart
+      //  .append('rect')
+      //  .attr('class', 'rect')
+      //  .attr('height', height?height:1000)
+      //  .attr('width', 30)
+      //  .attr('x', axisX(now - (n - 1 - ((count-40)%n)) * duration))
+      //  .attr('y', 0)
+      //  .attr('fill', 'black')
+
        });
+
   }
 
   getBeds() {
