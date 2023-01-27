@@ -1,9 +1,9 @@
 <div class="space_central" [class.bed4]="beds===4" [class.bed8]="beds===8" [class.bed16]="beds===16"
     [class.bed32]="beds===32">
     <!-- 환자 없을 때 -->
-    <!-- <div class="no-patient">
+    <div class="no-patient" *ngIf="!check">
         <div class="content">
-            <button mat-button>
+            <button mat-button (click)="addDevice()">
                 <svg _ngcontent-gwl-c271="" xmlns="http://www.w3.org/2000/svg" width="51" height="51"
                     viewBox="-4 -2 51 51" fill="none">
                     <g _ngcontent-gwl-c271="" filter="url(#filter0_d_2247_1177)" class="ng-tns-c271-2904">
@@ -42,13 +42,13 @@
             <p class="text">no patient</p>
         </div>
     </div>
-    <div class="priorityBorderBox"></div> -->
+    <div class="priorityBorderBox"></div>
     <!-- 헤더 -->
     <section class="header">
         <div class="space_name">OJT - 1</div>
         <div class="device_name">-</div>
         <div class="patient_name">
-            <button mat-button class="patientBtn">No Patient</button>
+            <button mat-button class="patientBtn" (click)="removeDevice()">No Patient</button>
         </div>
         <div class="alarmHeader"></div>
         <div class="history">
@@ -65,9 +65,26 @@
                 </div>
             </section>
             <section class="trend_charts">
-                <div class="tick_chart">
+                <div class='trend' style="color:#2eb337">
+                    <div class="trend_header">
+                        <div>Heart Ratebpm</div>
+                        <div *ngIf="check">최저/최고</div>
+                    </div>
+                    <div *ngIf="check" class="trend_content">
+                        <div class="currentStatus">{{heart?heart:null}}</div>
+                        <div>차트</div>
+                    </div>
                 </div>
-                <div></div>
+                <div class='trend' style="color:#e11584; border-left: 0.04vw solid hsla(0,0%,100%,.2);">
+                    <div class="trend_header">
+                        <div>Temp (s)   °C</div>
+                        <div *ngIf="check">최저/최고</div>
+                    </div>
+                    <div *ngIf="check" class="trend_content">
+                        <div class="currentStatus">{{temp?temp:null}}</div>
+                        <div *ngIf="check">차트</div>
+                    </div>
+                </div>
             </section>
         </section>
     </div>

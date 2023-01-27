@@ -66,8 +66,8 @@
 }
 
 .space_central .header .patientBtn{
-    width:60%;
-    height: 100%;
+    width:100%;
+    height: 80%;
     outline: none;
     line-height: 1rem;
     border: 1px solid hsla(0,0%,100%,.7);
@@ -201,6 +201,10 @@
     grid-template-rows: 60% 40%;
 }
 
+.bedOption_4_chart .charts .trend_charts{
+    grid-template-columns: 50% 50%;
+}
+
 .bedOption_8_chart .charts .trend_charts{
     grid-template-columns: 50% 50%;
 }
@@ -211,6 +215,30 @@
     padding-right: 1%;
     border-left: 1px solid hsla(0,0%,100%,.2);
     border-top: 0.04vw solid hsla(0,0%,100%,.2);
+}
+
+.trend_charts .trend{
+    position: relative;
+    display: grid;
+    grid-template-rows: 25% 75%;
+}
+
+.trend_charts .trend_header{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.trend_charts .trend_content{
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.trend_charts .trend_content .currentStatus{
+    font-size: 2.5rem;
+    justify-content: center!important;
+    align-items: center;
 }
 
 .waveform_chart .real_time_chart :first-child{
@@ -326,4 +354,5 @@
 .time_chart{
     width: 100%;
     height: 100%;
+    position:absolute;
 }

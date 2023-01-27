@@ -14,6 +14,10 @@ export class GroupsComponent implements OnInit {
   websocket!:WebSocket;
   subject = webSocket(wsServer);
   data1:number[] = [];
+  heartRate1:number[] = [];
+  temp1: number[] = [];
+  check:boolean = false;
+
 
   constructor(
     private monitorService: MonitorService,
@@ -72,7 +76,11 @@ export class GroupsComponent implements OnInit {
     this.subject.subscribe({
       next: (msg:any) => {
         this.data1 = msg.data?.dataSet.map((a:any)=>a.AB.AA.CAC).flat();
-        // console.log(this.data1)
+        // console.log(msg)
+        this.heartRate1 = msg.data?.dataSet.map((a:any)=>a.AB.AA?.AAA).flat().filter((data:any)=>data)[0]?
+          msg.data?.dataSet.map((a:any)=>a.AB.AA?.AAA).flat().filter((data:any)=>data):this.heartRate1;
+        this.temp1 = msg.data?.dataSet.map((a:any)=>a.AB.AA?.AAC).flat().filter((data:any)=>data)[0]?
+        msg.data?.dataSet.map((a:any)=>{if(a.AB.AA?.AAC){return (a.AB.AA?.AAC/10).toFixed(1)}else{return;}}).flat().filter((data:any)=>data):this.temp1;
       },
       error: err => console.log(err),
       complete: () => console.log('complete')
