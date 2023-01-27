@@ -20,21 +20,22 @@ export class SpaceCentralComponent implements OnInit {
   ngOnInit(): void {
     this.getBeds();
 
-    const canvas = d3.select('.tick_chart');
+    const canvas = d3.select('.time_chart');
     const n = 603;
     const duration = 300
     var now: any = new Date(Date.now() - duration)
 
-    var count: any = 0;
+    var count: any = -5;
     let a = 0;
     var data: any = d3.range(n).map(() => 32500);
     var arr:any=[];
+    let dumy:any = [];
 
 
     const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 
     const width = 2000 - margin.left - margin.right;
-    const height = 500 - margin.top - margin.bottom;
+    const height = 300 - margin.top - margin.bottom;
 
     const svg = canvas.append('svg')
       .attr('width', width)
@@ -53,7 +54,9 @@ export class SpaceCentralComponent implements OnInit {
     const line: any = d3.line()
       .x(function (d, i) { return x(now - (n - 1 - i) * duration); })
       .y(function (d: any, i) { return y(d); })
-      .curve(d3.curveBumpY);
+      .curve(d3.curveBumpY)
+      .defined(((d:any)=>d));
+
 
     const g = svg.append('g')
 
@@ -62,6 +65,7 @@ export class SpaceCentralComponent implements OnInit {
       .append('rect')
       .attr('width', width + 20)
       .attr('height', height)
+
 
     var axis= 
     g.append('g')
@@ -80,51 +84,39 @@ export class SpaceCentralComponent implements OnInit {
       .attr('class', 'line')
       .append("path") // path: 실제 데이터 구현 부
       .datum(data)
-      // .attr("class", "line") // (CSS)
       .attr('fill', 'none')
       .attr('stroke', 'rgb(66, 255, 79)')
       .attr('stroke-width', '2')
       .attr('transform', 'translate(0,0)')
-      // .attr('d', line(data))
-      // .attr('transform', `translate()`)
       .transition()
-      .duration(8)
+      .duration(40)
       .ease(d3.easeLinear)
       .on("start", tick);
 
 
-      interval(1000).subscribe(()=> arr=this.state)
+      interval(1000).subscribe(()=> {arr=this.state});
 
        function tick(this: any) {
         d3.select('.rect').remove()
         now = new Date();
-        console.log(count-a, arr.length)
         x.domain([now - (n - 2) * duration, now - duration]);
         y.domain([d3.min(data) as any, d3.max(data) as any]);
 
-        count++;
-
-        if(arr.length!==0&&arr.length>=(count-a)){
+        if(arr&&arr.length!==0){
+          count+=5;
           if(count-a === arr.length)
             a = count;
-          data[count%n] = arr[count-a];
+          dumy = [...arr];
+          data.splice((count%n),5, ...dumy.splice(count-a,5))
+          if(count%n+10<n)
+            data.splice((count%n)+5, 10, ...(new Array(10).fill(null)))
         }else{
           a = count;
-          data[count%n] = 32500;
         }
   
         d3.select(this) // 기본 변환행렬 초기화
           .attr("d", line(data))
           .attr("transform", null); // 선을 다시 그린다.
-  
-        d3.select('.line')
-          .append('rect')
-          .attr('class', 'rect')
-          .attr('height', height)
-          .attr('width', 30)
-          .attr('x', x(now - (n - 1 - (count%n)) * duration))
-          .attr('y', 0)
-          .attr('fill', 'black')
   
   
         axis.transition() // x축 설정, transition화

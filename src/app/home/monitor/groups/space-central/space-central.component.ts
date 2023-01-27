@@ -20,125 +20,113 @@ export class SpaceCentralComponent implements OnInit {
   ngOnInit(): void {
     this.getBeds();
 
-    let n = 745;
     const canvas = d3.select('.time_chart');
-    const width = document.querySelector('.time_chart')?.clientWidth;
-    // const height = document.querySelector('.time_chart')?.getBoundingClientRect().height;
-    const height = document.querySelector('.time_chart')?.getBoundingClientRect().height;
+    const n = 603;
+    const duration = 300
+    var now: any = new Date(Date.now() - duration)
+
+    var count: any = -5;
+    let a = 0;
     var data: any = d3.range(n).map(() => 32500);
     var arr:any=[];
-    var dumy:any=[];
+    let dumy:any = [];
 
-    let count = -5;
-    let init = 0;
+
+    const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+
+    const width = 2000 - margin.left - margin.right;
+    const height = 300 - margin.top - margin.bottom;
 
     const svg = canvas.append('svg')
-      .attr('width', width ? width : 0)
-      .attr('height', height ? height : 0);
+      .attr('width', width)
+      .attr('height', height + 50)
+      // .attr('transform', `translate(${margin.left + 100},${margin.top + 20})`)
 
-    let [mt, mb, mr, ml] = [50, 50, 50, 50];
+    var x = d3.scaleTime()
+      .domain([now - (n - 2) * duration, now - duration])
+      .range([0, width])
+    // .ticks(10)
 
-    const duration = 750;
-    var now: any = new Date(Date.now() - duration);
-
-    const graphWidth = width ? width - ml - mr : 0;
-    const graphHeight = height ? height - mt - mb : 0;
-
-    var axisX = d3.scaleTime()
-      .domain([now - (n - 2) * duration, now - duration]) 
-      .range([0, graphWidth])
-
-    var axisY = d3.scaleLinear()
-      .domain([32400, 32500])
-      .range([graphHeight, 0])
+    var y = d3.scaleLinear()
+      .domain([32400, 32600])
+      .range([height, 0]);
 
     const line: any = d3.line()
-      .x(function (d, i) { return axisX(now - (n - 1 - i) * duration); })
-      .y(function (d: any, i):any { 
-        if(d)
-          return axisY(d); 
-        else
-          return null;
-      })
+      .x(function (d, i) { return x(now - (n - 1 - i) * duration); })
+      .y(function (d: any, i) { return y(d); })
       .curve(d3.curveBumpY)
       .defined(((d:any)=>d));
 
-      const graph = svg. append('g')
-      .attr('width', graphWidth)
-      .attr('height', graphHeight+100)
-      .attr('transform', `translate(${ml},${mt})`)
-   
-      var axis = graph
-      .append('g')
-      .attr('transform', `translate(0,${graphHeight})`)
-      .attr('fill', 'green')
-      .attr('color', 'green')
-      // .call(d3.axisBottom(axisX))
 
-      graph
-      .append('g')
+    const g = svg.append('g')
+
+    g.append('defs').append('clipPath')
+      .attr('id', 'clip')
+      .append('rect')
+      .attr('width', width + 20)
+      .attr('height', height)
+
+
+    var axis= 
+    g.append('g')
       .attr('class', 'x axis')
-      .attr('fill', 'green')
-      .attr('color', 'green')
-      // .call(d3.axisLeft(axisY))
+      .attr('transform', `translate(5,${height + 10})`)
+      .call(d3.axisBottom(x))
 
-      const lineChart = graph.append('g')
-      .attr('class', 'chart')
-      .attr('transform', `translate(100,0)`);
-      
-      lineChart.append("path") // path: 실제 데이터 구현 부
+    g.append('g')
+      .attr('class', 'axis axis--y')
+      .attr('transform', `translate(${5},10)`)
+      .call(d3.axisLeft(y))
+
+    
+    g.append('g')
+      .attr('transform', `translate(40,10)`)
+      .attr('class', 'line')
+      .append("path") // path: 실제 데이터 구현 부
       .datum(data)
-      .attr('class', 'test')
       .attr('fill', 'none')
       .attr('stroke', 'rgb(66, 255, 79)')
       .attr('stroke-width', '2')
-      .attr('transform', 'translate(-100,0)')
-      .attr('d', line(data))
+      .attr('transform', 'translate(0,0)')
+      .transition()
+      .duration(40)
+      .ease(d3.easeLinear)
+      .on("start", tick);
 
-      const test = [1,2,3,4,5,6,7,8];
-      test.splice(6,5)
-      console.log(test)
 
-      const result = interval(40)
-       .subscribe(x=> {
-        d3.select('.test').remove()
+      interval(1000).subscribe(()=> {arr=this.state});
+
+       function tick(this: any) {
         d3.select('.rect').remove()
+        now = new Date();
+        x.domain([now - (n - 2) * duration, now - duration]);
+        y.domain([d3.min(data) as any, d3.max(data) as any]);
 
-        // count+=5;
-        if(this.state){
+        if(arr&&arr.length!==0){
           count+=5;
-          arr=this.state;
-        }
-
-        if(arr.length!==0){
-          if(count-init === arr.length)
-            init = count;
+          if(count-a === arr.length)
+            a = count;
           dumy = [...arr];
-          data.splice((count%n),5, ...dumy.splice(count-init,5))
+          data.splice((count%n),5, ...dumy.splice(count-a,5))
           if(count%n+10<n)
             data.splice((count%n)+5, 10, ...(new Array(10).fill(null)))
         }else{
-          init = count;
-          // data.splice((count%n),5, ...(new Array(10).fill(32500)))     
+          a = count;
         }
-        console.log(data);
-        now = new Date();
-        axisX.domain([now - (n - 2) * duration, now - duration]);
-        axisY.domain([d3.min(data) as any, d3.max(data) as any]);
-
-
-
-        lineChart.append("path") // path: 실제 데이터 구현 부
-       .datum(data)
-       .attr('class', 'test')
-       .attr('fill', 'none')
-       .attr('stroke', 'rgb(66, 255, 79)')
-       .attr('stroke-width', '1.5px')
-       .attr('transform', 'translate(-150,0)')
-       .attr('d', line(data))
-
-       });
-
+  
+        d3.select(this) // 기본 변환행렬 초기화
+          .attr("d", line(data))
+          .attr("transform", null); // 선을 다시 그린다.
+  
+  
+        axis.transition() // x축 설정, transition화
+          .ease(d3.easeLinear);
+  
+  
+        (d3.active(this) as any) // 변환행렬 설정
+          .transition() // 변환 start
+          .on("start", tick);
+      }
   }
 
   getBeds() {
