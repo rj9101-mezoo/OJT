@@ -137,15 +137,6 @@ export class SpaceCentralComponent implements OnInit {
        .attr('transform', 'translate(-150,0)')
        .attr('d', line(data))
 
-      //  lineChart
-      //  .append('rect')
-      //  .attr('class', 'rect')
-      //  .attr('height', height?height:1000)
-      //  .attr('width', 30)
-      //  .attr('x', axisX(now - (n - 1 - ((count-40)%n)) * duration))
-      //  .attr('y', 0)
-      //  .attr('fill', 'black')
-
        });
 
   }
