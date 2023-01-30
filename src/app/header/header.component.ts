@@ -60,7 +60,7 @@ export class HeaderComponent implements OnInit {
   }
 
   getBeds(){
-    this.selected = this.monitorService.getBeds();
+    this.selected= this.monitorService.getBeds();
   }
 
   changeBeds(number:number){

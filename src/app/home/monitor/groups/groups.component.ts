@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MonitorService } from '../../monitor.service';
 import { WebsocketService } from '../../websocket.service';
 import { webSocket } from 'rxjs/webSocket';
-import { interval, take } from 'rxjs';
+import { interval, switchMap, take } from 'rxjs';
 import { wsServer } from 'src/url';
 
 @Component({
@@ -17,10 +17,10 @@ export class GroupsComponent implements OnInit {
   heartRate1:number[] = [];
   temp1: number[] = [];
   check:boolean = false;
-
+  selected!:number;
 
   constructor(
-    private monitorService: MonitorService,
+    public monitorService: MonitorService,
     private websocketService: WebsocketService
   ) { 
   }
@@ -86,6 +86,7 @@ export class GroupsComponent implements OnInit {
       complete: () => console.log('complete')
     })
     this.send();
+
   }
 
   send(){
@@ -97,7 +98,6 @@ export class GroupsComponent implements OnInit {
     })
     // this.subject.complete();
   }
-
 
 
   makeUuid(): string {

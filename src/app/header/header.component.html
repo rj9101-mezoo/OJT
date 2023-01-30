@@ -14,7 +14,7 @@
   <div class="logo">
     <div class="time">{{date | date:'MM/d/y, HH:mm:ss'}}</div>
   </div>
-  <div class="option">
+  <div *ngIf="test === 'monitor'" class="option" >
     <div class="speaker action_btn" style="white-space: nowrap;">
       <svg _ngcontent-gwl-c252="" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="25" height="25" viewBox="0, 0, 110, 110">

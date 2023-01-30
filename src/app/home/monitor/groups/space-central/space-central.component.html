@@ -1,5 +1,5 @@
-<div class="space_central" [class.bed4]="beds===4" [class.bed8]="beds===8" [class.bed16]="beds===16"
-    [class.bed32]="beds===32">
+<div class="space_central" [class.bed4]="monitorService.beds===4" [class.bed8]="monitorService.beds===8" [class.bed16]="monitorService.beds===16"
+    [class.bed32]="monitorService.beds===32">
     <!-- 환자 없을 때 -->
     <div class="no-patient" *ngIf="!check">
         <div class="content">
@@ -56,7 +56,8 @@
         </div>
     </section>
     <!-- 메인  -->
-    <div class="bedOption_8_chart">
+    <div [class.bedOption_4_chart]="monitorService.beds===4" 
+    [class.bedOption_8_chart]="monitorService.beds!==4">
         <section class="charts">
             <section class="waveform_charts">
                 <div class="real_time_chart">
@@ -64,7 +65,7 @@
                     <div class="time_chart"></div>
                 </div>
             </section>
-            <section class="trend_charts">
+            <section class="trend_charts" [class.bedOption_4_trend]="monitorService.beds===4">
                 <div class='trend' style="color:#2eb337">
                     <div class="trend_header">
                         <div>Heart Ratebpm</div>
@@ -72,7 +73,9 @@
                     </div>
                     <div *ngIf="check" class="trend_content">
                         <div class="currentStatus">{{heart?heart:null}}</div>
-                        <div>차트</div>
+                        <div class="trend_chart">
+                            <img src="assets/img/heart_Ratebpm_chart.png"/>
+                        </div>
                     </div>
                 </div>
                 <div class='trend' style="color:#e11584; border-left: 0.04vw solid hsla(0,0%,100%,.2);">
@@ -82,7 +85,9 @@
                     </div>
                     <div *ngIf="check" class="trend_content">
                         <div class="currentStatus">{{temp?temp:null}}</div>
-                        <div *ngIf="check">차트</div>
+                        <div class="trend_chart">
+                            <img src="assets/img/temp_chart.png"/>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -90,10 +95,10 @@
     </div>
     <!-- 푸터 -->
     <section class="footer" 
-    [class.bedOption_4_footer]="beds===4" 
-    [class.bedOption_8_footer]="beds===8" 
-    [class.bedOption_16_footer]="beds===16"
-    [class.bedOption_32_footer]="beds===32">
+    [class.bedOption_4_footer]="monitorService.beds===4" 
+    [class.bedOption_8_footer]="monitorService.beds===8" 
+    [class.bedOption_16_footer]="monitorService.beds===16"
+    [class.bedOption_32_footer]="monitorService.beds===32">
         <button mat-button class="print">
             <div>
                 <svg _ngcontent-gwl-c271="" xmlns="http://www.w3.org/2000/svg" height="20" width="20"

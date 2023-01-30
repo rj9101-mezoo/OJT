@@ -193,7 +193,7 @@
 }
 
 .bedOption_4_chart .charts{
-    grid-template-columns: 70% 18% 12%;
+    grid-template-columns: 70% 30%;
 }
 
 .bedOption_8_chart .charts{
@@ -202,7 +202,7 @@
 }
 
 .bedOption_4_chart .charts .trend_charts{
-    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
 }
 
 .bedOption_8_chart .charts .trend_charts{
@@ -225,10 +225,9 @@
 
 .trend_charts .trend_header{
     display: flex;
+    padding: 5px;
     justify-content: space-between;
 }
-
-
 
 .trend_charts .trend_content{
     display: grid;
@@ -236,9 +235,15 @@
 }
 
 .trend_charts .trend_content .currentStatus{
+    display: flex;
     font-size: 2.5rem;
     justify-content: center!important;
     align-items: center;
+}
+
+.trend_charts .trend_content .trend_chart img{
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .waveform_chart .real_time_chart :first-child{
@@ -355,4 +360,6 @@
     width: 100%;
     height: 100%;
     position:absolute;
+    /* box-sizing: border-box;
+    border:1px solid red; */
 }

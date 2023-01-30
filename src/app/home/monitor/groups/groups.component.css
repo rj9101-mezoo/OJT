@@ -29,3 +29,18 @@
     column-gap: 0.2rem;
     row-gap: 0.2rem;
 }
+
+.wrapper .bedOption_4{
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(4,1fr);
+}
+
+.wrapper .bedOption_8{
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4,1fr);
+}
+
+.wrapper .bedOption_16{
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(8,1fr);
+}

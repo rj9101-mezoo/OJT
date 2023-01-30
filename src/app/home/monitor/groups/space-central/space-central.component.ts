@@ -9,8 +9,6 @@ import { interval } from 'rxjs';
   styleUrls: ['./space-central.component.css']
 })
 export class SpaceCentralComponent implements OnInit {
-  beds!: number;
-
   @Input()
   state!: number[];
   @Input()
@@ -23,36 +21,43 @@ export class SpaceCentralComponent implements OnInit {
 
 
   constructor(
-    private monitorService: MonitorService
+    public monitorService: MonitorService
   ) { }
 
   ngOnInit(): void {
-    this.getBeds();
       let n = 995;
       const canvas = d3.select('.time_chart');
-      const width = document.querySelector('.time_chart')?.clientWidth;
-      const height = document.querySelector('.waveform_charts')?.getBoundingClientRect().height;
-      // const height =150;
+      // const width = document.querySelector('.time_chart')?.scrollWidth;
+      // const height = parseInt(canvas.style('height'));
+      // // const height = document.querySelector('.time_chart')?.scrollHeight;
+
+      // getComputedStyle
       var data: any = d3.range(n).map(() => 32500);
       var arr: any = [];
-      var dumy: any = [];
+      // var dumy: any = [];
 
       let count = -5;
       let init = 0;
 
       const svg = canvas.append('svg')
-        .attr('width', width ? width : 0)
-        .attr('height', height ? height + 100 : 0 + 100)
+        .attr('width', '100%')
+        // .attr('width', width ? width : 0)
+        // .attr('height', height ? height + 100+'px' : 0 + 100)
+        .attr('height', '100%')
         .attr('transform', `translate(0,0)`)
+        .attr('display', 'inline-block')
 
       let [mt, mb, mr, ml] = [50, 50, 50, 50];
 
       const duration = 750;
       var now: any = new Date(Date.now() - duration);
 
-      const graphWidth = width ? width - ml - mr + 100 : 0;
-      const graphHeight = height ? height - mt - mb + 100 : 0 + 100;
-
+      let graphWidth = parseInt(canvas.style('width'))-10;
+      if(this.monitorService.beds==4)
+        graphWidth = graphWidth*0.7;
+      // const graphHeight = height ? height - mt - mb + 100 : 0 + 100;
+      const graphHeight = parseInt(canvas.style('height'));
+      
       var axisX = d3.scaleTime()
         .domain([now - (n - 2) * duration, now - duration])
         .range([0, graphWidth])
@@ -72,9 +77,10 @@ export class SpaceCentralComponent implements OnInit {
         .curve(d3.curveBumpY)
         .defined(((d: any) => d));
 
-      const graph = svg.append('g')
-        .attr('width', graphWidth)
-        .attr('height', graphHeight + 100)
+      if(this.check){
+        const graph = svg.append('g')
+        .attr('width', '100%')
+        .attr('height', '100%')
         .attr('transform', `translate(${ml},${mt})`)
 
       var axis = graph
@@ -119,8 +125,11 @@ export class SpaceCentralComponent implements OnInit {
           if (arr.length !== 0) {
             if (count - init === arr.length)
               init = count;
-            dumy = [...arr];
-            data.splice((count % n), 5, ...dumy.splice(count - init, 5))
+            // dumy = [...arr];
+            // data.splice((count % n), 5, ...dumy.splice(count - init, 5))
+            for(let i = 0; i< 5; i++)
+              data.splice((count % n)+i,1, arr[count-init+i]);
+            
             if (count % n + 10 < n)
               data.splice((count % n) + 5, 10, ...(new Array(10).fill(null)))
           } else {
@@ -142,11 +151,10 @@ export class SpaceCentralComponent implements OnInit {
             .attr('d', line(data))
         }
         });
+      }
   }
 
-  getBeds() {
-    this.beds = this.monitorService.getBeds();
-  }
+
 
   addDevice(){
     this.check=true;
@@ -154,5 +162,6 @@ export class SpaceCentralComponent implements OnInit {
 
   removeDevice(){
     this.check= false;
+
   }
 }
