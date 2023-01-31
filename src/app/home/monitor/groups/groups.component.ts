@@ -76,7 +76,6 @@ export class GroupsComponent implements OnInit {
     this.subject.subscribe({
       next: (msg:any) => {
         this.data1 = msg.data?.dataSet.map((a:any)=>a.AB.AA.CAC).flat();
-        // console.log(msg)
         this.heartRate1 = msg.data?.dataSet.map((a:any)=>a.AB.AA?.AAA).flat().filter((data:any)=>data)[0]?
           msg.data?.dataSet.map((a:any)=>a.AB.AA?.AAA).flat().filter((data:any)=>data):this.heartRate1;
         this.temp1 = msg.data?.dataSet.map((a:any)=>a.AB.AA?.AAC).flat().filter((data:any)=>data)[0]?
