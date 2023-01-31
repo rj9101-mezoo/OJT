@@ -36,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { InformationComponent } from './crm/hospital/information/information.component';
 import { GroupsComponent } from './home/monitor/groups/groups.component';
 import { FooterComponent } from './footer/footer.component';
-import { SpaceCentralComponent } from './home/monitor/groups/space-central/space-central.component'; 
+import { SpaceCentralComponent } from './home/monitor/groups/space-central/space-central.component';
+import { TickCentralComponent } from './home/monitor/groups/tick-central/tick-central.component'; 
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { SpaceCentralComponent } from './home/monitor/groups/space-central/space
     InformationComponent,
     GroupsComponent,
     FooterComponent,
-    SpaceCentralComponent
+    SpaceCentralComponent,
+    TickCentralComponent
   ],
   imports: [
     // material style

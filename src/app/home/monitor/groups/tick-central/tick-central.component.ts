@@ -5,11 +5,11 @@ import { interval } from 'rxjs';
 import { WebsocketService } from 'src/app/home/websocket.service';
 
 @Component({
-  selector: 'app-space-central',
-  templateUrl: './space-central.component.html',
-  styleUrls: ['./space-central.component.css']
+  selector: 'app-tick-central',
+  templateUrl: './tick-central.component.html',
+  styleUrls: ['./tick-central.component.css']
 })
-export class SpaceCentralComponent implements OnInit {
+export class TickCentralComponent {
   // @Input()
   // state!: number[];
   @Input()
@@ -110,45 +110,50 @@ export class SpaceCentralComponent implements OnInit {
         .attr('fill', 'none')
         .attr('stroke', 'rgb(66, 255, 79)')
         .attr('stroke-width', '2')
-        .attr('transform', 'translate(-100,0)')
-        .attr('d', line(data))
-
-      const result = interval(40)
-        .subscribe(x => {
-          d3.select('.test').remove()
-          d3.select('.rect').remove()
-          if (this.check) {
-
-            if (this.websocketService.data1 && this.websocketService.data1.length !== 0) {
-              count += 5;
-              if (count - init === this.websocketService.data1.length)
-                init = count;
-              // dumy = [...arr];
-              // data.splice((count % n), 5, ...dumy.splice(count - init, 5))
-              for (let i = 0; i < 5; i++)
-                data.splice((count % n) + i, 1, this.websocketService.data1[count - init + i]);
-
-              if (count % n + 10 < n)
-                data.splice((count % n) + 5, 10, ...(new Array(10).fill(null)))
-            } else if(this.websocketService.data1){
-              init = count;
-            }
-            now = new Date();
-            axisX.domain([now - (n - 2) * duration, now - duration]);
-            axisY.domain([d3.min(data) as any, d3.max(data) as any]);
+        .attr('transform', 'translate(-150,0)')
+        .transition()
+        .duration(40)
+        .ease(d3.easeLinear)
+        .on("start", tick);
 
 
+      interval(1000).subscribe(() => {
+        arr = this.websocketService.data1
+       });
 
-            lineChart.append("path") // path: 실제 데이터 구현 부
-              .datum(data)
-              .attr('class', 'test')
-              .attr('fill', 'none')
-              .attr('stroke', 'rgb(66, 255, 79)')
-              .attr('stroke-width', '1.5px')
-              .attr('transform', 'translate(-150,0)')
-              .attr('d', line(data))
-          }
-        });
+      function tick(this: any) {
+        // d3.select('.rect').remove()
+        now = new Date();
+        axisX.domain([now - (n - 2) * duration, now - duration]);
+        axisY.domain([d3.min(data) as any, d3.max(data) as any]);
+
+        if (arr && arr.length !== 0) {
+          count += 5;
+          if (count - init === arr.length)
+            init = count;
+          for (let i = 0; i < 5; i++)
+            data.splice((count % n) + i, 1, arr[count - init + i]);
+
+          if (count % n + 10 < n)
+            data.splice((count % n) + 5, 10, ...(new Array(10).fill(null)))
+        } else if (arr) {
+          init = count;
+        }
+
+        d3.select(this) // 기본 변환행렬 초기화
+          .attr("d", line(data))
+          // .attr("transform", null); // 선을 다시 그린다.
+          .attr('transform', 'translate(-150,0)')
+
+
+        axis.transition() // x축 설정, transition화
+          .ease(d3.easeLinear);
+
+
+        (d3.active(this) as any) // 변환행렬 설정
+          .transition() // 변환 start
+          .on("start", tick);
+      }
     }
   }
 

@@ -22,8 +22,7 @@ export class GroupsComponent implements OnInit {
   constructor(
     public monitorService: MonitorService,
     private websocketService: WebsocketService
-  ) { 
-  }
+  ) {}
 
   // onpenWebsocketConnection(){
   //   this.websocket = new WebSocket(wsServer)
