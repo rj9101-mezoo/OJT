@@ -4,7 +4,7 @@
         <div class="select-hospital">
             <div class="header">Hospital :&nbsp;</div>
             <mat-select [(value)]="selected">
-                <mat-option *ngFor="let hospital of hospitals" [value]="hospital._id">
+                <mat-option *ngFor="let hospital of hospitals" [value]="hospital._id" (click)="hospital._id?moveDetail(hospital._id):null">
                     <p style="color:black">{{hospital.hospitalName}}</p>
                 </mat-option>
             </mat-select>

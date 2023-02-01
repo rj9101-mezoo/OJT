@@ -19,6 +19,9 @@ export class TickCentralComponent {
   @Input()
   check!: boolean;
 
+  @Input()
+  index!:string;
+
 
   constructor(
     public monitorService: MonitorService,
@@ -29,7 +32,7 @@ export class TickCentralComponent {
     this.websocketService.connect()
     this.websocketService.send("F2:79:B7:F0:D6:42")
     let n = 995;
-    const canvas = d3.select('.time_chart');
+    const canvas = d3.selectAll('.time_chart');
     // const width = document.querySelector('.time_chart')?.scrollWidth;
     // const height = parseInt(canvas.style('height'));
     // // const height = document.querySelector('.time_chart')?.scrollHeight;
@@ -111,6 +114,7 @@ export class TickCentralComponent {
         .attr('stroke', 'rgb(66, 255, 79)')
         .attr('stroke-width', '2')
         .attr('transform', 'translate(-150,0)')
+        .attr('position', 'absolute')
         .transition()
         .duration(40)
         .ease(d3.easeLinear)
@@ -143,12 +147,7 @@ export class TickCentralComponent {
         d3.select(this) // 기본 변환행렬 초기화
           .attr("d", line(data))
           // .attr("transform", null); // 선을 다시 그린다.
-          .attr('transform', 'translate(-150,0)')
-
-
-        axis.transition() // x축 설정, transition화
-          .ease(d3.easeLinear);
-
+          .attr('transform', 'translate(-150,0)');
 
         (d3.active(this) as any) // 변환행렬 설정
           .transition() // 변환 start

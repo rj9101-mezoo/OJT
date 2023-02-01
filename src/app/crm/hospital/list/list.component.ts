@@ -70,13 +70,13 @@ export class ListComponent {
     this.selected=String(this.route.snapshot.paramMap.get('id'));
     this.deviceService.getDevices(this.selected).subscribe(devices=>{ 
       this.devices = devices;
-      console.log(this.devices);
+      console.log(devices);
       this.dataSource = new MatTableDataSource(this.devices);
     })
     // this.devices = DEVICES;
   }
 
-  moveDetail(id:number){
+  moveDetail(id:any){
     this.router.navigate([`/crm/hospital/${id}`]);
   }
 

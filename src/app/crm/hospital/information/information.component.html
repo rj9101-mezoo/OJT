@@ -1,56 +1,89 @@
 <div class="content">
-    <mat-card _ngcontent-ufo-c290="" class="mat-card mat-focus-indicator">
-        <div _ngcontent-ufo-c290="" class="title"><mat-card-header _ngcontent-ufo-c290="" class="mat-card-header">
-                <div class="mat-card-header-text"><mat-card-title _ngcontent-ufo-c290=""
-                        class="mat-card-title hospital">TEST2</mat-card-title><mat-card-title _ngcontent-ufo-c290=""
-                        class="mat-card-title">Information</mat-card-title></div>
-            </mat-card-header>
-            <div _ngcontent-ufo-c290="" class="ng-untouched ng-pristine ng-valid"><mat-checkbox _ngcontent-ufo-c290=""
-                    formcontrolname="selfHospitalControl"
-                    class="mat-checkbox mat-accent readonly input-disabled ng-untouched ng-pristine ng-valid"
-                    id="mat-checkbox-33"><label class="mat-checkbox-layout" for="mat-checkbox-33-input">
-                        <div class="mat-checkbox-inner-container"><input type="checkbox"
-                                class="mat-checkbox-input cdk-visually-hidden" id="mat-checkbox-33-input" tabindex="0"
-                                aria-checked="false">
-                            <div matripple="" class="mat-ripple mat-checkbox-ripple mat-focus-indicator">
-                                <div class="mat-ripple-element mat-checkbox-persistent-ripple"></div>
-                            </div>
-                            <div class="mat-checkbox-frame"></div>
-                            <div class="mat-checkbox-background"><svg version="1.1" focusable="false"
-                                    viewBox="0 0 24 24" xml:space="preserve" class="mat-checkbox-checkmark">
-                                    <path fill="none" stroke="white" d="M4.1,12.7 9,17.6 20.3,6.3"
-                                        class="mat-checkbox-checkmark-path"></path>
-                                </svg>
-                                <div class="mat-checkbox-mixedmark"></div>
-                            </div>
-                        </div><span class="mat-checkbox-label"><span style="display: none;">&nbsp;</span>Self Review
-                            Hospital</span>
-                    </label></mat-checkbox></div><mat-card-actions _ngcontent-ufo-c290=""
-                class="mat-card-actions"><button _ngcontent-ufo-c290="" mat-button=""
-                    class="mat-focus-indicator mat-button mat-button-base"><span class="mat-button-wrapper">Edit</span>
-                    <div matripple="" class="mat-ripple mat-button-ripple"></div>
-                    <div class="mat-button-focus-overlay"></div>
-                </button></mat-card-actions>
-        </div><mat-card-content _ngcontent-ufo-c290="" class="mat-card-content form-disabled">
-            <form _ngcontent-ufo-c290="" novalidate="" class="ng-untouched ng-pristine ng-valid">
-                <div _ngcontent-ufo-c290="" class="two-content"></div>
-                <div _ngcontent-ufo-c290="" class="three-content"></div>
-                <div _ngcontent-ufo-c290="" class="two-content"></div>
-                <div _ngcontent-ufo-c290="" class="three-content"></div>
-                <div _ngcontent-ufo-c290="" class="two-content select-form"></div>
-                <div _ngcontent-ufo-c290="" class="two-content date-picker"></div>
-            </form>
-        </mat-card-content><mat-card-actions _ngcontent-ufo-c290="" class="mat-card-actions button-box disabled"><button
-                _ngcontent-ufo-c290="" mat-flat-button=""
-                class="mat-focus-indicator cancel mat-flat-button mat-button-base"><span
-                    class="mat-button-wrapper">Cancel</span>
-                <div matripple="" class="mat-ripple mat-button-ripple"></div>
-                <div class="mat-button-focus-overlay"></div>
-            </button><button _ngcontent-ufo-c290="" mat-flat-button=""
-                class="mat-focus-indicator save mat-flat-button mat-button-base save-disabled" disabled="true"><span
-                    class="mat-button-wrapper">Save</span>
-                <div matripple="" class="mat-ripple mat-button-ripple"></div>
-                <div class="mat-button-focus-overlay"></div>
-            </button></mat-card-actions>
-    </mat-card>
+    <div class="mat-card">
+        <div class="title">
+                <div >
+                    <p>{{this.hospital?.hospital}}</p>
+                    <h1>Information</h1>
+                </div>
+                <div class="self_check">
+                    <input  type="checkbox" class="check_box" [checked]="!edit" (click)="edit"/>
+                    <p>Self Review Hospital</p>
+                </div>
+                <button [class.edit]="!edit" (click)="editContent()" [disabled]="edit">Edit</button>
+        </div>
+        <div class="mat-card-content">
+            <div class="two_content">
+                <div class="input_set">
+                    <label>Name *</label>
+                    <input [disabled]="true" [value]="this.hospital?.hospital"/>
+                </div>
+                <div class="input_set">
+                    <label>Initial *</label>
+                    <input [disabled]="true" [value]="this.hospital?.name"/>
+                </div>
+            </div>
+            <div class="three_content">
+                <div class="input_set">
+                    <label>State *</label>
+                    <input [disabled]="!edit" [value]="this.hospital?.location.state"/>
+                </div>
+                <div class="input_set">
+                    <label>City *</label>
+                    <input [disabled]="!edit" [value]="this.hospital?.location.city"/>
+                </div>
+                <div class="input_set">
+                    <label>Zip Code *</label>
+                    <input [disabled]="!edit" [value]="this.hospital?.location.zipCode"/>
+                </div>
+            </div>
+            <div class="two_content">
+                <div class="input_set">
+                    <label>Street Address *</label>
+                    <input [disabled]="!edit" [value]="this.hospital?.location.address"/>
+                </div>
+                <div class="input_set">
+                    <label>Street Address2</label>
+                    <input [disabled]="!edit" [value]="this.hospital?.location.address2"/>
+                </div>
+            </div>
+            <div class="three_content">
+                <div class="input_set">
+                    <label>Contact Name *</label>
+                    <input [disabled]="!edit" [value]="this.hospital?.contact.name"/>
+                </div>
+                <div class="input_set">
+                    <label>Contact Phone *</label>
+                    <input [disabled]="!edit" [value]="this.hospital?.contact.phone"/>
+                </div>
+                <div class="input_set">
+                    <label>Contact Email *</label>
+                    <input [disabled]="!edit" [value]="this.hospital?.contact.email"/>
+                </div>
+            </div>
+            <div class="two_content">
+                <div class="input_set">
+                    <label>No. of Bed Sold *</label>
+                    <input [disabled]="!edit" [value]="this.hospital?.purchase.beds"/>
+                </div>
+                <div class="input_set">
+                    <label>No. of Device Sold</label>
+                    <input [disabled]="true" [value]="this.hospital?.purchase.devices"/>
+                </div>
+            </div>
+            <div class="two_content">
+                <div class="input_set">
+                    <label>Contact Start Date</label>
+                    <input type="date" [disabled]="!edit" [value]="this.hospital?.date.startDate|date:'YYYY-MM-dd'" pattern="\d{2}/\d{2}/\d{4}"/>
+                </div>
+                <div class="input_set">
+                    <label>Contact Expiration Date</label>
+                    <input type="date" [disabled]="!edit" [value]="this.hospital?.date.expirationDate|date:'YYYY-MM-dd'"/>
+                </div>
+            </div>
+        </div>
+        <div class="disabled">
+            <button [class.cancel]="edit" (click)="editContent()" [disabled]="!edit">Cancel</button>
+            <button [class.save]="edit" [disabled]="!edit">Save</button>
+        </div>
+    </div>
 </div>

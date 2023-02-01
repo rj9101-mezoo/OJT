@@ -62,7 +62,7 @@
             <section class="waveform_charts">
                 <div class="real_time_chart">
                     <div class="title">ECG&nbsp;&nbsp;</div>
-                    <div class="time_chart"></div>
+                    <div class="time_chart" [ngClass]="index?index:''"></div>
                 </div>
             </section>
             <section class="trend_charts" [class.bedOption_4_trend]="monitorService.beds===4">

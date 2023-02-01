@@ -5,8 +5,122 @@
 }
 
 .mat-card{
+    background-color: white;
+    color: rgba(0,0,0,0.87);
     height: 100%;
     display: grid;
     grid-template-rows: 15% 75% 10%;
     padding: 1rem 3rem;
+}
+
+.title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.title .self_check{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title .check_box{
+    transform:  scale(1.5);
+    margin-right: 10px;
+    margin-bottom:10px;
+}
+
+input[type="checkbox"]:checked+label{ font-weight: bold; }
+input[type="checkbox"]:disabled+label
+{
+     background-color:red !important;
+}
+.title button{
+    border:none;
+    background-color: white;
+    color: white;
+    border-radius: 4px;
+    height: 36px;
+    font-weight: 500;
+    font-size: 1.1em;
+    width:  10rem;
+}
+
+.title .edit{
+    background-color: #4a4c64 !important;
+    cursor: pointer;
+}
+
+.mat-card-content{
+    display: grid;
+    grid-template-rows: repeat(6,1fr);
+    align-items: center;
+}
+
+.mat-card-content .input_set{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.mat-card-content .input_set input{
+    border:none;
+    border-bottom: 1px solid black;
+    outline: none;
+    font-size: inherit;
+    padding: 8px;
+}
+
+.mat-card-content .input_set input:focus{
+    border-bottom: 3px solid blue;
+}
+
+.mat-card-content .input_set input:disabled{
+    background-color: white;
+}
+
+.two_content{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+.three_content{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
+.disabled{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.disabled button{
+    border:none;
+    background-color: white;
+    color: white;
+    border-radius: 4px;
+    height: 36px;
+    font-weight: 500;
+    font-size: 1.1em;
+    margin-bottom: -8px;
+    padding:8px;
+    min-width: 64px;
+    white-space: nowrap;
+    box-sizing: border-box;
+    text-align: center;
+
+}
+
+.disabled .save{
+    background-color: #f72c93 !important;
+    cursor: pointer;
+}
+
+.disabled .cancel{
+    background-color: #c1c1c1 !important;
+    color: black !important;
+    cursor: pointer;
 }

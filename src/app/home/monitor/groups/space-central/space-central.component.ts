@@ -29,7 +29,7 @@ export class SpaceCentralComponent implements OnInit {
     this.websocketService.connect()
     this.websocketService.send("F2:79:B7:F0:D6:42")
     let n = 995;
-    const canvas = d3.select('.time_chart');
+    const canvas = d3.selectAll('.time_chart');
     // const width = document.querySelector('.time_chart')?.scrollWidth;
     // const height = parseInt(canvas.style('height'));
     // // const height = document.querySelector('.time_chart')?.scrollHeight;
@@ -116,7 +116,7 @@ export class SpaceCentralComponent implements OnInit {
       const result = interval(40)
         .subscribe(x => {
           d3.select('.test').remove()
-          d3.select('.rect').remove()
+          // d3.selectAll('.rect').remove()
           if (this.check) {
 
             if (this.websocketService.data1 && this.websocketService.data1.length !== 0) {
