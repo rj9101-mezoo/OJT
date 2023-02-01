@@ -2,6 +2,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/auth/user.service';
 import { Device } from '../../device';
@@ -33,6 +34,7 @@ export class ListComponent {
     ];
   dataSource!: MatTableDataSource<Device>
   checkColor:string =  'accent';
+  tab!:number;
 
 
   constructor(
@@ -42,9 +44,12 @@ export class ListComponent {
     private router: Router,
     private _liveAnnouncer: LiveAnnouncer,
     private deviceService:DeviceService
-  ) { }
+  ) {
+
+   }
 
   ngOnInit() {
+    this.getTab();
     this.getHospitals();
     this.getHospital();
     this.getDevices();
@@ -77,7 +82,14 @@ export class ListComponent {
   }
 
   moveDetail(id:any){
-    this.router.navigate([`/crm/hospital/${id}`]);
+    this.router.navigate([`/crm/hospital/${id}`])
+    .then(()=> location.reload())
+    // // location.reload()
+    
+    // this.router.navigateByUrl(`/crm/hospital/${id}`, {skipLocationChange:true})
+    // .then(()=> this.router.navigate([ListComponent]))
+
+    // this.router.navigate([`/crm/hospital/${id}`],{skipLocationChange:true, queryParamsHandling:'merge'})
   }
 
   announceSortChange(sortState: Sort) {
@@ -115,6 +127,16 @@ export class ListComponent {
 
   updateCecked(id: number){
     this.devices.filter(t => t.index === id).forEach(t => (t.checked = !t.checked));
+  }
+
+  changeTab(tabChangeEvent: MatTabChangeEvent){
+    console.log(tabChangeEvent);
+    localStorage.setItem('tab', String(tabChangeEvent.index));
+    this.tab = tabChangeEvent.index;
+  }
+
+  getTab(){
+    this.tab = localStorage.getItem('tab')?Number(localStorage.getItem('tab')):0;
   }
 
 }

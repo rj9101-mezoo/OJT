@@ -6,7 +6,7 @@
                     <h1>Information</h1>
                 </div>
                 <div class="self_check">
-                    <input  type="checkbox" class="check_box" [checked]="!edit" (click)="edit"/>
+                    <input  type="checkbox" class="check_box" [checked]="this.hospital?.serviceType.holter==='self'" (click)="edit"/>
                     <p>Self Review Hospital</p>
                 </div>
                 <button [class.edit]="!edit" (click)="editContent()" [disabled]="edit">Edit</button>
@@ -14,76 +14,76 @@
         <div class="mat-card-content">
             <div class="two_content">
                 <div class="input_set">
-                    <label>Name *</label>
-                    <input [disabled]="true" [value]="this.hospital?.hospital"/>
+                    <input [disabled]="true" [value]="this.input?.hospital"/>
+                    <label>Name <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
-                    <label>Initial *</label>
-                    <input [disabled]="true" [value]="this.hospital?.name"/>
+                    <input [disabled]="true" [value]="this.input?.name"/>
+                    <label>Initial <span class="require">*</span></label>
                 </div>
             </div>
             <div class="three_content">
                 <div class="input_set">
-                    <label>State *</label>
-                    <input [disabled]="!edit" [value]="this.hospital?.location.state"/>
+                    <input [disabled]="!edit" [value]="this.input?.location.state"/>
+                    <label>State <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
-                    <label>City *</label>
-                    <input [disabled]="!edit" [value]="this.hospital?.location.city"/>
+                    <input [disabled]="!edit" [value]="this.input?.location.city"/>
+                    <label>City <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
-                    <label>Zip Code *</label>
-                    <input [disabled]="!edit" [value]="this.hospital?.location.zipCode"/>
+                    <input [disabled]="!edit" [value]="this.input?.location.zipCode"/>
+                    <label>Zip Code <span class="require">*</span></label>
                 </div>
             </div>
             <div class="two_content">
                 <div class="input_set">
-                    <label>Street Address *</label>
-                    <input [disabled]="!edit" [value]="this.hospital?.location.address"/>
+                    <input [disabled]="!edit" [value]="this.input?.location.address1"/>
+                    <label>Street Address <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
+                    <input [disabled]="!edit" [value]="this.input?.location.address2"/>
                     <label>Street Address2</label>
-                    <input [disabled]="!edit" [value]="this.hospital?.location.address2"/>
                 </div>
             </div>
             <div class="three_content">
                 <div class="input_set">
-                    <label>Contact Name *</label>
-                    <input [disabled]="!edit" [value]="this.hospital?.contact.name"/>
+                    <input [disabled]="!edit" [value]="this.input?.contact.name" [class.null]=""/>
+                    <label>Contact Name <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
-                    <label>Contact Phone *</label>
-                    <input [disabled]="!edit" [value]="this.hospital?.contact.phone"/>
+                    <input [disabled]="!edit" [value]="this.input?.contact.phone"/>
+                    <label>Contact Phone <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
-                    <label>Contact Email *</label>
-                    <input [disabled]="!edit" [value]="this.hospital?.contact.email"/>
+                    <input [disabled]="!edit" [value]="this.input?.contact.email"/>
+                    <label>Contact Email <span class="require">*</span></label>
                 </div>
             </div>
             <div class="two_content">
                 <div class="input_set">
-                    <label>No. of Bed Sold *</label>
-                    <input [disabled]="!edit" [value]="this.hospital?.purchase.beds"/>
+                    <input [disabled]="!edit" [value]="this.input?.purchase.beds"/>
+                    <label>No. of Bed Sold <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
+                    <input [disabled]="true" [value]="this.input?.purchase.devices"/>
                     <label>No. of Device Sold</label>
-                    <input [disabled]="true" [value]="this.hospital?.purchase.devices"/>
                 </div>
             </div>
             <div class="two_content">
                 <div class="input_set">
+                    <input id="startDate" type="date" [disabled]="!edit" [value]="this.input?.date.startDate|date:'YYYY-MM-dd'" pattern="\d{2}/\d{2}/\d{4}" (click)="focusDate($event)"/>
                     <label>Contact Start Date</label>
-                    <input type="date" [disabled]="!edit" [value]="this.hospital?.date.startDate|date:'YYYY-MM-dd'" pattern="\d{2}/\d{2}/\d{4}"/>
                 </div>
                 <div class="input_set">
+                    <input id="" type="date" [disabled]="!edit" [value]="this.input?.date.expirationDate|date:'YYYY-MM-dd'" (click)="focusDate($event)"/>
                     <label>Contact Expiration Date</label>
-                    <input type="date" [disabled]="!edit" [value]="this.hospital?.date.expirationDate|date:'YYYY-MM-dd'"/>
                 </div>
             </div>
         </div>
         <div class="disabled">
-            <button [class.cancel]="edit" (click)="editContent()" [disabled]="!edit">Cancel</button>
-            <button [class.save]="edit" [disabled]="!edit">Save</button>
+            <button [class.cancel]="edit" (click)="cancelContent()" [disabled]="!edit">Cancel</button>
+            <button [class.save]="edit" (click)="editContent()" [disabled]="!edit">Save</button>
         </div>
     </div>
 </div>

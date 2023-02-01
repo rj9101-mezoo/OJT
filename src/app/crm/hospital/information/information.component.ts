@@ -10,6 +10,7 @@ import { HospitalService } from '../../hospital.service';
 export class InformationComponent implements OnInit {
   edit:boolean = false;
   hospital!:any;
+  input!:any;
   constructor(
     private hospitalService:HospitalService,
     private route: ActivatedRoute,
@@ -19,11 +20,28 @@ export class InformationComponent implements OnInit {
   }
   
   getHospital(){
-    this.hospitalService.getHospital(String(this.route.snapshot.paramMap.get('id'))).subscribe(data=> this.hospital=data);
+    this.hospitalService.getHospital(String(this.route.snapshot.paramMap.get('id'))).subscribe(data=> {
+      this.hospital=data;
+      this.input = Object.assign({}, this.hospital);
+      console.log(this.hospital);
+    });
   }
 
   editContent(){
     this.edit = !this.edit;
   }
 
+  cancelContent(){
+    // location.reload();
+    this.getHospital();
+    this.edit = !this.edit;
+  }
+
+  focusDate(event:MouseEvent){
+    console.log(event);
+  }
+
+  // nullCheck(a:any):boolean{
+  //   return a.target.value;
+  // }
 }

@@ -60,7 +60,7 @@ input[type="checkbox"]:disabled+label
 
 .mat-card-content .input_set{
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     padding: 10px;
 }
 
@@ -74,6 +74,14 @@ input[type="checkbox"]:disabled+label
 
 .mat-card-content .input_set input:focus{
     border-bottom: 3px solid blue;
+}
+
+.mat-card-content .input_set input:focus + label{
+    color: blue;
+}
+
+.mat-card-content .input_set input:focus + label .require{
+    color: red;
 }
 
 .mat-card-content .input_set input:disabled{

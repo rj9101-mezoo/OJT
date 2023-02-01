@@ -45,7 +45,7 @@
             </div>
         </div>
     </div>
-    <mat-tab-group>
+    <mat-tab-group (selectedTabChange)="changeTab($event)" [selectedIndex]="tab">
         <mat-tab label="Devices">
             <div class="content">
                 <div class="content-top">
@@ -102,7 +102,7 @@
                     <div class="search">
                         <div class="search-box">
                             <mat-icon style="padding-right:20px">search</mat-icon>
-                            <input #searchBox placeholder="Hospital Name">
+                            <input #searchBox placeholder="Hicardi Name">
                         </div>
                     </div>
                 </div>
