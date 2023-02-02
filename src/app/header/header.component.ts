@@ -64,6 +64,7 @@ export class HeaderComponent implements OnInit {
   }
 
   changeBeds(number:number){
+    location.reload();
     this.monitorService.changeBeds(number);
   }
 

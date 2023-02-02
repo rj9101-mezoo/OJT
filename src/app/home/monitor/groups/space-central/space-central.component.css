@@ -362,4 +362,9 @@
     position:absolute;
     /* box-sizing: border-box;
     border:1px solid red; */
+    white-space: nowrap;
+}
+
+.check_blank{
+    display:none !important;
 }

@@ -117,8 +117,9 @@
                                     </mat-checkbox>
                                 </th>
                                 <td mat-cell *matCellDef="let element">
-                                    <mat-checkbox [(ngModel)]="element.checked" [color]="checkColor"
-                                        (ngModelChange)="updateAllComplete()">
+                                    <mat-checkbox [(ngModel)]="element.checked" [color]="checkColor" (click)="prevent(element.index)"
+                                        (ngModelChange)="updateAllComplete()"
+                                        >
                                     </mat-checkbox>
                                 </td>
                             </ng-container>
@@ -216,7 +217,7 @@
                         Accounts
                     </div>
                     <div class="content-top-right">
-                        <div class="total">Total: 111</div>
+                        <div class="total">Total: {{accounts.length}}</div>
                         <div class="search" style="padding-bottom:0">
                             <div class="search-box" style="width:100%;background-color: white;">
                                 <mat-icon style="padding-right:20px">search</mat-icon>
@@ -237,7 +238,7 @@
                     </div>
                 </div>
                 <div class="content-bottom">
-                    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+                    <table mat-table [dataSource]="dataSource2" matSort (matSortChange)="announceSortChange($event)"
                         class="mat-elevation-z8 demo-table">
                         <section class="example-section">
                             <ng-container matColumnDef="check">
@@ -260,59 +261,56 @@
                             </ng-container>
     
                             <!-- Name Column -->
-                            <ng-container matColumnDef="hicardiName">
+                            <ng-container matColumnDef="id">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by hicardiName">Hospital Name</th>
+                                    sortActionDescription="Sort by id">ID</th>
                                 <td mat-cell *matCellDef="let element">
-                                    {{element.hicardiName}}
-                                    <span *ngIf="element.self" class="self">self</span>
+                                    {{element.id}}
+                                </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="userName">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    sortActionDescription="Sort by userName">User Name</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.userName}}
+                                </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="hospital">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    sortActionDescription="Sort by hospital">Hospital</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.hospital}}
                                 </td>
                             </ng-container>
     
                             <!-- Weight Column -->
-                            <ng-container matColumnDef="deviceType">
+                            <ng-container matColumnDef="registrationDate">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by deviceType">Device Type</th>
-                                <td mat-cell *matCellDef="let element">{{element.deviceType}}</td>
+                                    sortActionDescription="Sort by registrationDate">Registration Date</th>
+                                <td mat-cell *matCellDef="let element">{{element.registrationDate|date:"medium"}}</td>
                             </ng-container>
     
                             <!-- Symbol Column -->
-                            <ng-container matColumnDef="hospital">
+                            <ng-container matColumnDef="expirationDate">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by hospital">Hospital</th>
-                                <td mat-cell *matCellDef="let element">{{element.hospital}}</td>
+                                    sortActionDescription="Sort by expirationDate">Expiration Date</th>
+                                <td mat-cell *matCellDef="let element">{{element.expirationDate|date:"medium"}}</td>
                             </ng-container>
     
                             <!-- Symbol Column -->
-                            <ng-container matColumnDef="bedNo">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by bedNo">
-                                    Bed No.</th>
-                                <td mat-cell *matCellDef="let element">{{element.bedNo}}</td>
-                            </ng-container>
-    
-                            <!-- Symbol Column -->
-                            <ng-container matColumnDef="macAddress">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by macAddress">MAC Address</th>
-                                <td mat-cell *matCellDef="let element">{{element.macAddress}}</td>
-                            </ng-container>
-    
-                            <!-- Symbol Column -->
-                            <ng-container matColumnDef="registeredDate">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by registeredDate">Registration Date</th>
-                                <td mat-cell *matCellDef="let element">{{element.registeredDate| date:'medium'}}</td>
-                            </ng-container>
-    
-                            <ng-container matColumnDef="lastConnectedDate">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by lastConnectedDate">Last Connection Date</th>
-                                <td mat-cell *matCellDef="let element">{{element.lastConnectedDate| date:'medium'}}</td>
+                            <ng-container matColumnDef="accessLevel">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by accessLevel">
+                                    Access Level</th>
+                                <td mat-cell *matCellDef="let element">{{element.accessLevel}}</td>
                             </ng-container>
     
     
-                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                            <tr mat-row (click)="updateCecked(row.index)" *matRowDef="let row; columns: displayedColumns;">
+                            <tr mat-header-row *matHeaderRowDef="accountsColumns"></tr>
+                            <tr mat-row (click)="updateCecked(row.index)" *matRowDef="let row; columns: accountsColumns;">
                             </tr>
                         </section>
                     </table>
@@ -320,7 +318,7 @@
             </div>
         </mat-tab>
         <mat-tab label="Information">
-            <app-information></app-information>
+            <app-information [info]="this.hospital" [cancel]="this.hospitalService"></app-information>
         </mat-tab>
     </mat-tab-group>
 </div>

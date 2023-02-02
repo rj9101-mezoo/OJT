@@ -7,7 +7,7 @@ import { map, Observable, of, switchMap, tap } from 'rxjs';
 })
 export class MonitorService {
   beds:number = 4;
-  array:number[] = [];
+  array:number[] = [1,2];
 
   constructor(
     private http: HttpClient
@@ -16,7 +16,7 @@ export class MonitorService {
   getBeds():number{
     if(localStorage.getItem('bedOption')){
       this.beds =Number(localStorage.getItem('bedOption'));
-      this.array = new Array(this.beds-1).map((d,i)=>i);
+      this.array = new Array(this.beds-2).map((d,i)=>i);
       return this.beds;
     }
     else{

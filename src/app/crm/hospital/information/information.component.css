@@ -88,6 +88,10 @@ input[type="checkbox"]:disabled+label
     background-color: white;
 }
 
+.mat-card-content .blank{
+    color: red !important;
+}
+
 .two_content{
     display: grid;
     grid-template-columns: repeat(2,1fr);

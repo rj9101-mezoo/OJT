@@ -10,18 +10,17 @@ import { WebsocketService } from 'src/app/home/websocket.service';
   styleUrls: ['./tick-central.component.css']
 })
 export class TickCentralComponent {
-  // @Input()
-  // state!: number[];
-  @Input()
-  heart!: number[];
-  @Input()
-  temp!: number[];
+
   @Input()
   check!: boolean;
 
   @Input()
   index!:string;
 
+  public n:number = 995
+  public data: any = d3.range(this.n).map(() => null);
+  public count = -5;
+  public init = 0;
 
   constructor(
     public monitorService: MonitorService,
@@ -32,17 +31,17 @@ export class TickCentralComponent {
     this.websocketService.connect()
     this.websocketService.send("F2:79:B7:F0:D6:42")
     let n = 995;
-    const canvas = d3.selectAll('.time_chart');
+    const canvas = d3.selectAll('.real_chart');
     // const width = document.querySelector('.time_chart')?.scrollWidth;
     // const height = parseInt(canvas.style('height'));
     // // const height = document.querySelector('.time_chart')?.scrollHeight;
 
     // getComputedStyle
-    var data: any = d3.range(n).map(() => 32500);
+    var data = this.data;
     var arr: any = [];
     // var dumy: any = [];
 
-    let count = -5;
+    let count = this.count;
     let init = 0;
 
     const svg = canvas.append('svg')
@@ -62,7 +61,7 @@ export class TickCentralComponent {
     if (this.monitorService.beds == 4)
       graphWidth = graphWidth * 0.7;
     // const graphHeight = height ? height - mt - mb + 100 : 0 + 100;
-    const graphHeight = parseInt(canvas.style('height'));
+    const graphHeight = parseInt(canvas.style('height'))/2+20;
 
     var axisX = d3.scaleTime()
       .domain([now - (n - 2) * duration, now - duration])
@@ -107,13 +106,14 @@ export class TickCentralComponent {
         .attr('class', 'chart')
         .attr('transform', `translate(100,0)`);
 
+      // if()
       lineChart.append("path") // path: 실제 데이터 구현 부
         .datum(data)
-        .attr('class', 'test')
+        .attr('class', 'path')
         .attr('fill', 'none')
         .attr('stroke', 'rgb(66, 255, 79)')
-        .attr('stroke-width', '2')
-        .attr('transform', 'translate(-150,0)')
+        .attr('stroke-width', '2.5')
+        .attr('transform', 'translate(-150,-50)')
         .attr('position', 'absolute')
         .transition()
         .duration(40)
@@ -122,7 +122,7 @@ export class TickCentralComponent {
 
 
       interval(1000).subscribe(() => {
-        arr = this.websocketService.data1
+        arr = this.websocketService.data1;
        });
 
       function tick(this: any) {
@@ -130,6 +130,9 @@ export class TickCentralComponent {
         now = new Date();
         axisX.domain([now - (n - 2) * duration, now - duration]);
         axisY.domain([d3.min(data) as any, d3.max(data) as any]);
+
+        // axisX.range([0, parseInt(canvas.style('width')) - 10])
+        // axisY.range([parseInt(canvas.style('height'))/2+20, 0])
 
         if (arr && arr.length !== 0) {
           count += 5;
@@ -147,7 +150,7 @@ export class TickCentralComponent {
         d3.select(this) // 기본 변환행렬 초기화
           .attr("d", line(data))
           // .attr("transform", null); // 선을 다시 그린다.
-          .attr('transform', 'translate(-150,0)');
+          .attr('transform', 'translate(-150,-30)');
 
         (d3.active(this) as any) // 변환행렬 설정
           .transition() // 변환 start
@@ -164,6 +167,16 @@ export class TickCentralComponent {
 
   removeDevice() {
     this.check = false;
-
+    console.log(this.init)
+    if(this.init>0){
+      this.data = d3.range(this.n).map((d,i) => {
+        if(i>this.init)
+          return 32500;
+        else
+          return null;
+      });
+    }
+    else
+      this.data = d3.range(this.n).map(() => null);
   }
 }

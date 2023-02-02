@@ -140,6 +140,7 @@
     background-color: whitesmoke;
     color: black;
     white-space: nowrap;
+    /* text-align: center; */
 }
 
 .mat-mdc-cell {
@@ -151,10 +152,11 @@
     position: sticky;
     top: 0px;
     z-index: 100;
+    border-left: 10px solid #dfe1e7;
 }
 
-.mat-mdc-header-cell {
-    text-align: center;
+::ng-deep .mat-mdc-header-cell {
+    text-align: center !important;
     color: gray;
     white-space: nowrap;
 }
@@ -166,6 +168,14 @@
 
 .mat-column-index {
     padding: 24px;
+}
+
+.mat-column-index{
+    border-left: 10px solid #dfe1e7;
+}
+
+.mat-mdc-row .mat-column-index {
+    border-left: 10px solid whitesmoke;
 }
 
 .mat-mdc-row:hover .mat-column-index {

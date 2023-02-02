@@ -71,22 +71,28 @@
                         <div>Heart Ratebpm</div>
                         <div *ngIf="check">최저/최고</div>
                     </div>
-                    <div *ngIf="check" class="trend_content">
-                        <div class="currentStatus">{{websocketService.heartRate1?websocketService.heartRate1:null}}</div>
-                        <div class="trend_chart">
-                            <img src="assets/img/heart_Ratebpm_chart.png"/>
+                    <div class="trend_content" [class.check_blank]="!check">
+                        <div  class="currentStatus">{{websocketService.heartRate1?websocketService.heartRate1:null}}</div>
+                        <div  class="trend_chart">
+                            <!-- <svg>
+                                <g class="trend_x"></g>
+                                <g class="trend_y"></g>
+                            </svg> -->
                         </div>
                     </div>
                 </div>
                 <div class='trend' style="color:#e11584; border-left: 0.04vw solid hsla(0,0%,100%,.2);">
                     <div class="trend_header">
                         <div>Temp (s)   °C</div>
-                        <div *ngIf="check">최저/최고</div>
+                        <div>최저/최고</div>
                     </div>
-                    <div *ngIf="check" class="trend_content">
-                        <div class="currentStatus">{{websocketService.temp1?websocketService.temp1:null}}</div>
-                        <div class="trend_chart">
-                            <img src="assets/img/temp_chart.png"/>
+                    <div class="trend_content" [class.check_blank]="!check">
+                        <div  class="currentStatus">{{websocketService.temp1?websocketService.temp1:null}}</div>
+                        <div  class="trend_chart">
+                            <!-- <svg>
+                                <g class="trend_x"></g>
+                                <g class="trend_y"></g>
+                            </svg> -->
                         </div>
                     </div>
                 </div>

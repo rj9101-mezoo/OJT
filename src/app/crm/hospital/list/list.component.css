@@ -320,6 +320,14 @@
     white-space: nowrap;
 }
 
+.mat-mdc-cell {
+    /* text-align: center; */
+}
+
+.mat-mdc-row .mat-column-check {
+    border-left: 10px solid white;
+}
+
 .mat-mdc-row:hover .mat-mdc-cell {
     /* border-color: currentColor; */
     background-color: whitesmoke;
@@ -338,9 +346,10 @@
 }
 
 .mat-mdc-header-cell {
-    text-align: center;
-    color: black;
+    text-align: center !important;
+    color: gray;
     white-space: nowrap;
+    justify-content: center;
 }
 
 .mat-mdc-checkbox.mat-accent {

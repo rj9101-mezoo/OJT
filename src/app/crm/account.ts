@@ -6,5 +6,5 @@ export interface Account{
     hospital: string,
     registrationDate:string,
     expirationDate:string,
-    accessLevel:string
+    accessLevel:string[]
    }

@@ -18,6 +18,7 @@ export class GroupsComponent implements OnInit {
   temp1: number[] = [];
   check:boolean = false;
   selected!:number;
+  baseArray:number[] = [0,1,2];
 
   constructor(
     public monitorService: MonitorService,

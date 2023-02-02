@@ -2,11 +2,11 @@
     <div class="mat-card">
         <div class="title">
                 <div >
-                    <p>{{this.hospital?.hospital}}</p>
+                    <p>{{info?.hospital}}</p>
                     <h1>Information</h1>
                 </div>
                 <div class="self_check">
-                    <input  type="checkbox" class="check_box" [checked]="this.hospital?.serviceType.holter==='self'" (click)="edit"/>
+                    <input  type="checkbox" class="check_box" [checked]="info?.serviceType.holter==='self'" (click)="edit"/>
                     <p>Self Review Hospital</p>
                 </div>
                 <button [class.edit]="!edit" (click)="editContent()" [disabled]="edit">Edit</button>
@@ -14,76 +14,76 @@
         <div class="mat-card-content">
             <div class="two_content">
                 <div class="input_set">
-                    <input [disabled]="true" [value]="this.input?.hospital"/>
+                    <input [disabled]="true" [value]="info?.hospital"/>
                     <label>Name <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
-                    <input [disabled]="true" [value]="this.input?.name"/>
+                    <input [disabled]="true" [value]="info?.name"/>
                     <label>Initial <span class="require">*</span></label>
                 </div>
             </div>
             <div class="three_content">
                 <div class="input_set">
-                    <input [disabled]="!edit" [value]="this.input?.location.state"/>
-                    <label>State <span class="require">*</span></label>
+                    <input [disabled]="!edit" [(ngModel)]="info?.location.state"/>
+                    <label [class.blank]="!info?.location.state">State <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
-                    <input [disabled]="!edit" [value]="this.input?.location.city"/>
-                    <label>City <span class="require">*</span></label>
+                    <input [disabled]="!edit" [(ngModel)]="info?.location.city"/>
+                    <label [class.blank]="!info?.location.city">City <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
-                    <input [disabled]="!edit" [value]="this.input?.location.zipCode"/>
-                    <label>Zip Code <span class="require">*</span></label>
+                    <input [disabled]="!edit" [(ngModel)]="info?.location.zipCode"/>
+                    <label [class.blank]="!info?.location.zipCode">Zip Code <span class="require">*</span></label>
                 </div>
             </div>
             <div class="two_content">
                 <div class="input_set">
-                    <input [disabled]="!edit" [value]="this.input?.location.address1"/>
-                    <label>Street Address <span class="require">*</span></label>
+                    <input [disabled]="!edit" [(ngModel)]="info?.location.address1"/>
+                    <label [class.blank]="!info?.location.address1">Street Address <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
-                    <input [disabled]="!edit" [value]="this.input?.location.address2"/>
-                    <label>Street Address2</label>
+                    <input [disabled]="!edit" [(ngModel)]="info?.location.address2"/>
+                    <label [class.blank]="!info?.location.address2">Street Address2</label>
                 </div>
             </div>
             <div class="three_content">
                 <div class="input_set">
-                    <input [disabled]="!edit" [value]="this.input?.contact.name" [class.null]=""/>
-                    <label>Contact Name <span class="require">*</span></label>
+                    <input [disabled]="!edit" [(ngModel)]="info?.contact.name" [class.null]=""/>
+                    <label [class.blank]="!info?.contact.name">Contact Name <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
-                    <input [disabled]="!edit" [value]="this.input?.contact.phone"/>
-                    <label>Contact Phone <span class="require">*</span></label>
+                    <input [disabled]="!edit" [(ngModel)]="info?.contact.phone"/>
+                    <label [class.blank]="!info?.contact.phone">Contact Phone <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
-                    <input [disabled]="!edit" [value]="this.input?.contact.email"/>
-                    <label>Contact Email <span class="require">*</span></label>
+                    <input [disabled]="!edit" [(ngModel)]="info?.contact.email"/>
+                    <label [class.blank]="!info?.contact.email">Contact Email <span class="require">*</span></label>
                 </div>
             </div>
             <div class="two_content">
                 <div class="input_set">
-                    <input [disabled]="!edit" [value]="this.input?.purchase.beds"/>
-                    <label>No. of Bed Sold <span class="require">*</span></label>
+                    <input [disabled]="!edit" [(ngModel)]="info?.purchase.beds"/>
+                    <label [class.blank]="!info?.purchase.beds">No. of Bed Sold <span class="require">*</span></label>
                 </div>
                 <div class="input_set">
-                    <input [disabled]="true" [value]="this.input?.purchase.devices"/>
+                    <input [disabled]="true" [(ngModel)]="info?.purchase.devices"/>
                     <label>No. of Device Sold</label>
                 </div>
             </div>
             <div class="two_content">
                 <div class="input_set">
-                    <input id="startDate" type="date" [disabled]="!edit" [value]="this.input?.date.startDate|date:'YYYY-MM-dd'" pattern="\d{2}/\d{2}/\d{4}" (click)="focusDate($event)"/>
+                    <input id="startDate" type="date" [disabled]="!edit" [value]="info?.date.startDate|date:'YYYY-MM-dd'" pattern="\d{2}/\d{2}/\d{4}" (click)="focusDate($event)"/>
                     <label>Contact Start Date</label>
                 </div>
                 <div class="input_set">
-                    <input id="" type="date" [disabled]="!edit" [value]="this.input?.date.expirationDate|date:'YYYY-MM-dd'" (click)="focusDate($event)"/>
+                    <input id="" type="date" [disabled]="!edit" [value]="info?.date.expirationDate|date:'YYYY-MM-dd'" (click)="focusDate($event)"/>
                     <label>Contact Expiration Date</label>
                 </div>
             </div>
         </div>
         <div class="disabled">
             <button [class.cancel]="edit" (click)="cancelContent()" [disabled]="!edit">Cancel</button>
-            <button [class.save]="edit" (click)="editContent()" [disabled]="!edit">Save</button>
+            <button [class.save]="edit" (click)="saveContent()" [disabled]="!edit">Save</button>
         </div>
     </div>
 </div>

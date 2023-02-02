@@ -16,6 +16,10 @@ export class DeviceService {
     private http: HttpClient
   ) { }
 
+  get allDevices() {
+    return this.devices;
+  }
+
   getDevices(id:string): Observable<Device[]> {
     const test1 = this.http.get(`${apiHttpServer}/groups/get-group/${id}`,{
       params:{
@@ -26,11 +30,16 @@ export class DeviceService {
       params:{
         accountId: this.accuntId
     }}).pipe(
+      tap((response: any) => {
+        if (response?.result) {
+          this.devices = response?.data;
+        }
+      }),
         map((x:any)=>x.data.filter((d:any)=>h.data.devices.includes(d._id))),
-        tap(x=>console.log(x)),
+        // tap(x=>console.log(x)),
         map(d=>d.map((d:any, i:any)=>{
           return {
-            index: i,
+            index: i+1,
             hicardiName: d.peripheral.name,
             deviceType:"RealTime",
             hospital:h.data.hospital,
@@ -42,12 +51,12 @@ export class DeviceService {
       )
     )
   )
-  const test3 = this.http.get(`${apiHttpServer}/spaces`,{
-    params:{
-      accountId: this.accuntId
-  }})
+  // const test3 = this.http.get(`${apiHttpServer}/spaces`,{
+  //   params:{
+  //     accountId: this.accuntId
+  // }})
 
-  test3.subscribe(x=>console.log(x))
+  // test3.subscribe(x=>console.log(x))
 
     return test2;
   }

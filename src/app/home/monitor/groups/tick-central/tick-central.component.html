@@ -62,7 +62,7 @@
             <section class="waveform_charts">
                 <div class="real_time_chart">
                     <div class="title">ECG&nbsp;&nbsp;</div>
-                    <div class="time_chart" [ngClass]="index?index:''"></div>
+                    <div class="real_chart" [ngClass]="index?index:''"></div>
                 </div>
             </section>
             <section class="trend_charts" [class.bedOption_4_trend]="monitorService.beds===4">
@@ -73,8 +73,7 @@
                     </div>
                     <div *ngIf="check" class="trend_content">
                         <div class="currentStatus">{{websocketService.heartRate1?websocketService.heartRate1:null}}</div>
-                        <div class="trend_chart">
-                            <img src="assets/img/heart_Ratebpm_chart.png"/>
+                        <div class="trend_chart2">
                         </div>
                     </div>
                 </div>
@@ -85,8 +84,7 @@
                     </div>
                     <div *ngIf="check" class="trend_content">
                         <div class="currentStatus">{{websocketService.temp1?websocketService.temp1:null}}</div>
-                        <div class="trend_chart">
-                            <img src="assets/img/temp_chart.png"/>
+                        <div class="trend_chart2">
                         </div>
                     </div>
                 </div>

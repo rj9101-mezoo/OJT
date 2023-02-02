@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiHttpServer } from 'src/url';
 
 import {Observable,from, of, tap, filter, catchError, map, mergeMap} from 'rxjs';
+import { Account } from './account';
 
 @Injectable({
   providedIn: 'root'
@@ -20,23 +21,37 @@ export class HospitalService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  // getTest(){
-  //   const test1 = this.http.get(`${apiHttpServer}/groups/getHospitals`,{
-  //     params:{
-  //       accountId: this.accuntId
-  //   }})
-  //       .pipe(
-  //         map((x:any)=>x.data.filter((x:any)=>x.agencyId == localStorage.getItem('agencyId'))),
-  //         catchError(this.handleError<any>('login', []))
-  //       )
-
-  //   // const test1 = this.http.get(`${apiHttpServer}/groups/get-group/${this.hospitalId}`,{
-  //   //   params:{
-  //   //     accountId: this.accuntId
-  //   // }})
-
-  //   test1.subscribe(x=>console.log(x))
-  // }
+  getTest(id:string):Observable<Account[]>{
+    const test1 = this.http.get(`${apiHttpServer}/groups/get-group/${id}`,{
+      params:{
+        accountId: this.accuntId
+    }})
+    const test2  = test1.pipe(
+      mergeMap((h:any)=> this.http.get(`${apiHttpServer}/accounts/getAllAccounts`,{
+        params:{
+          accountId: this.accuntId
+      }}).pipe(
+        map((x:any)=>x.data.filter((d:any)=>h.data.accounts.includes(d._id))),
+        // tap(x=>console.log(x)),
+        map((d:any)=>d.map((d:any,i:any)=>{
+          return {
+            index: i+1,
+            id: d.accountId,
+            userName:d.name,
+            hospital:h.data.hospital,
+            registrationDate:d.registeredDate,
+            expirationDate:d.expiredDate,
+            accessLevel:d.roles
+          }
+        })
+      ))
+    ))
+    // const test1 = this.http.get(`${apiHttpServer}/groups/get-group/${this.hospitalId}`,{
+    //   params:{
+    //     accountId: this.accuntId
+    // }})
+    return test2;
+  }
 
   getHospital(id: string) {
     const test1 = this.http.get(`${apiHttpServer}/groups/get-group/${id}`,{

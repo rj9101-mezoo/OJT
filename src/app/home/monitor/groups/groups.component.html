@@ -2,7 +2,7 @@
     <section class="chart_block">
         <section class="group_central" [class.bedOption_4]="monitorService.beds === 4" [class.bedOption_8]="monitorService.beds == 8" [class.bedOption_16]="monitorService.beds == 16">
             <app-space-central [check]="true"></app-space-central>
-            <!-- <app-space-central [check]="true"></app-space-central> -->
+            <app-tick-central [check]="true"></app-tick-central>
             <app-space-central *ngFor="let data of monitorService.array" [check]="false"></app-space-central>
         </section>
     </section>

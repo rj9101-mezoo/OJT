@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { interval } from 'rxjs';
 import { HospitalService } from '../../hospital.service';
 
 @Component({
@@ -8,6 +9,12 @@ import { HospitalService } from '../../hospital.service';
   styleUrls: ['./information.component.css']
 })
 export class InformationComponent implements OnInit {
+  @Input()
+    info:any;
+
+  @Input()
+    cancel!:HospitalService;
+
   edit:boolean = false;
   hospital!:any;
   input!:any;
@@ -16,14 +23,14 @@ export class InformationComponent implements OnInit {
     private route: ActivatedRoute,
     ){}
   ngOnInit(){
-    this.getHospital();
+    // this.getHospital();
   }
   
   getHospital(){
     this.hospitalService.getHospital(String(this.route.snapshot.paramMap.get('id'))).subscribe(data=> {
       this.hospital=data;
       this.input = Object.assign({}, this.hospital);
-      console.log(this.hospital);
+      // console.log(this.hospital);
     });
   }
 
@@ -33,8 +40,18 @@ export class InformationComponent implements OnInit {
 
   cancelContent(){
     // location.reload();
-    this.getHospital();
+    this.cancel.getHospital(String(this.route.snapshot.paramMap.get('id'))).subscribe(data=>{
+      this.info=data
+    });
     this.edit = !this.edit;
+  }
+
+  saveContent(){
+    console.log(document.getElementsByClassName('blank'))
+    if(!document.getElementsByClassName('blank').length)
+      this.edit = !this.edit;
+    else
+      alert("빈칸을 채워주세요")
   }
 
   focusDate(event:MouseEvent){

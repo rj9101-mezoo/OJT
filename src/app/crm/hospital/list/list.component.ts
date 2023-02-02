@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/auth/user.service';
+import { Account } from '../../account';
 import { Device } from '../../device';
 import { DeviceService } from '../../device.service';
 import { Hospital } from '../../hospital';
@@ -21,6 +22,7 @@ export class ListComponent {
   selected!:string;
   hospital!:any;
   devices:Device[] = [];
+  accounts:Account[] = [];
   displayedColumns: string[] = [
     'check',
     'index',
@@ -32,14 +34,25 @@ export class ListComponent {
     'registeredDate',
     'lastConnectedDate'
     ];
+  accountsColumns: string[] = [
+    'check',
+    'index',
+    'id',
+    'userName',
+    'hospital',
+    'registrationDate',
+    'expirationDate',
+    'accessLevel'
+  ]
   dataSource!: MatTableDataSource<Device>
+  dataSource2!: MatTableDataSource<Account>
   checkColor:string =  'accent';
   tab!:number;
 
 
   constructor(
     private userService:UserService, 
-    private hospitalService:HospitalService, 
+    public hospitalService:HospitalService, 
     private route: ActivatedRoute,
     private router: Router,
     private _liveAnnouncer: LiveAnnouncer,
@@ -53,7 +66,9 @@ export class ListComponent {
     this.getHospitals();
     this.getHospital();
     this.getDevices();
+    this.getAccounts();
     this.dataSource = new MatTableDataSource(this.devices)
+    this.hospitalService.getTest(String(this.route.snapshot.paramMap.get('id')));
   }
 
   logout(){
@@ -62,7 +77,7 @@ export class ListComponent {
 
   getHospital():void{
     this.selected=String(this.route.snapshot.paramMap.get('id'));
-    this.hospitalService.getHospital(this.selected).subscribe(data =>console.log(data));
+    this.hospitalService.getHospital(this.selected).subscribe(hospital => this.hospital=hospital);
   }
 
   getHospitals():void{
@@ -71,19 +86,36 @@ export class ListComponent {
     )
   }
 
-  getDevices():void{
+  getAccounts():void{
     this.selected=String(this.route.snapshot.paramMap.get('id'));
-    this.deviceService.getDevices(this.selected).subscribe(devices=>{ 
-      this.devices = devices;
-      console.log(devices);
-      this.dataSource = new MatTableDataSource(this.devices);
+    this.hospitalService.getTest(this.selected).subscribe(accounts=>{ 
+      this.accounts = accounts;
+      this.accounts.reverse();
+      // console.log(accounts);
+      this.dataSource2 = new MatTableDataSource(this.accounts);
     })
     // this.devices = DEVICES;
   }
 
+  getDevices():void{
+    this.selected=String(this.route.snapshot.paramMap.get('id'));
+    this.deviceService.getDevices(this.selected).subscribe(devices=>{ 
+      this.devices = devices;
+      this.devices.reverse();
+      // console.log(devices);
+      this.dataSource = new MatTableDataSource(this.devices);
+    })
+  }
+
   moveDetail(id:any){
     this.router.navigate([`/crm/hospital/${id}`])
-    .then(()=> location.reload())
+    .then(()=> {
+      this.getTab();
+      this.getHospitals();
+      this.getHospital();
+      this.getDevices();
+      this.getAccounts();
+    })
     // // location.reload()
     
     // this.router.navigateByUrl(`/crm/hospital/${id}`, {skipLocationChange:true})
@@ -122,6 +154,7 @@ export class ListComponent {
     if (this.devices == null) {
       return;
     }
+    console.log(this.allComplete);
     this.devices.forEach(t => (t.checked = completed));
   }
 
@@ -137,6 +170,10 @@ export class ListComponent {
 
   getTab(){
     this.tab = localStorage.getItem('tab')?Number(localStorage.getItem('tab')):0;
+  }
+
+  prevent(id: number){
+    this.devices.filter(t => t.index === id).forEach(t => (t.checked = !t.checked));
   }
 
 }
